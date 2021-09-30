@@ -22,7 +22,7 @@ function aah_create_tables_request_ajax() { ?>
             var data = {
                 'action': 'aah_ajax_create_tables',
             };
-            jQuery.post(ajaxurl, data, function(response) {
+            jQuery.post("admin-ajax.php", data, function(response) {
                 // if(response['success'] == 'true') {
                 //     alert('Tables created successfully');
                 // } else {
