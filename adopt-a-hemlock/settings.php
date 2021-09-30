@@ -78,7 +78,7 @@ function aah_render_tables_create_page() {
                     }
                 });
             });
-        }
+        )};
     </script>
     </div>
     <?php
