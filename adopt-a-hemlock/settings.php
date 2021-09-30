@@ -40,7 +40,7 @@ function aah_create_tables_action_ajax() {
     echo $result;
     wp_die();
 }
-add_action('wp_ajax_aah_ajax_create_tables', 'aah_create_tables_ajax');
+add_action('wp_ajax_aah_ajax_create_tables', 'aah_create_tables_action_ajax');
 
 
 // hook to add custom action
