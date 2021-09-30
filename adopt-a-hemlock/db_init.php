@@ -11,12 +11,12 @@ function aah_create_tables($sql_file) {
 
     // load file
     if(!($queries = file_get_contents($sql_file))) {
-        return "<div><h3>Table creation failed!</h3></div>";
+        return "<div><h3>Table creation failed!</h3><br><p>Failed at file_get_contents</p></div>";
     }
 
     // split into array
     if (!($queries = explode(";", $queries))) {
-        return "<div><h3>Table creation failed!</h3></div>";
+        return "<div><h3>Table creation failed!</h3><br><p>Failed at explode</p></div>";
     }
 
     // run queries
