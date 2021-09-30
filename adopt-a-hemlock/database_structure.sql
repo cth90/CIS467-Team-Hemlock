@@ -42,12 +42,12 @@ CREATE TABLE `aah_transactions` (
   `anonymous` boolean
 );
 
-ALTER TABLE `aah_surveyor` ADD FOREIGN KEY (`id`) REFERENCES `aah_trees` (`surveyor_id`);
+ALTER TABLE `aah_trees` ADD FOREIGN KEY (`surveyor_id`) REFERENCES `aah_surveyor` (`id`);
 
-ALTER TABLE `aah_counties` ADD FOREIGN KEY (`id`) REFERENCES `aah_trees` (`county_id`);
+ALTER TABLE `aah_trees` ADD FOREIGN KEY (`county_id`) REFERENCES `aah_counties` (`id`);
 
-ALTER TABLE `aah_customers` ADD FOREIGN KEY (`id`) REFERENCES `aah_transactions` (`customer_id`);
+ALTER TABLE `aah_transactions` ADD FOREIGN KEY (`customer_id`) REFERENCES `aah_customers` (`id`);
 
-ALTER TABLE `aah_trees` ADD FOREIGN KEY (`tag`) REFERENCES `aah_transactions` (`tree_id`);
+ALTER TABLE `aah_transactions` ADD FOREIGN KEY (`tree_id`) REFERENCES `aah_trees` (`tag`);
 
-ALTER TABLE `aah_locations` ADD FOREIGN KEY (`id`) REFERENCES `aah_trees` (`location_id`);
+ALTER TABLE `aah_trees` ADD FOREIGN KEY (`location_id`) REFERENCES `aah_locations` (`id`);

@@ -19,7 +19,7 @@ function aah_create_tables_action() {
 add_action( 'admin_post_aah_create_tables', 'aah_create_tables_action' );
 
 function aah_configure_settings_page() {
-    add_menu_page( "Adopt-a-Hemlock Settings", "Create Database Tables",
+    add_menu_page( "Adopt-a-Hemlock Settings", "Adopt-a-Hemlock Settings",
         "manage_options", "adopt-a-hemlock", "aah_render_tables_create_page");
 }
 
