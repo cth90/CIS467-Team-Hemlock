@@ -4,13 +4,14 @@
  * using the same db as WordPress.
  */
 
-function aah_create_tables($sql_file) {
+function aah_create_tables($sql_file)
+{
 
     // global variable for wordpress db class
     global $wpdb;
 
     // load file
-    if(!($queries = file_get_contents($sql_file))) {
+    if (!($queries = file_get_contents($sql_file))) {
         $e = error_get_last()['message'];
         return "<div><h3>Table creation failed!</h3><br><p>Failed at file_get_contents</p><p>$e</p></div>";
     }
@@ -22,9 +23,11 @@ function aah_create_tables($sql_file) {
 
     // run queries
     foreach ($queries as $query) {
-        if ( !( $wpdb->query($query) ) ) {
-            // if a query fails
-            return "<div><h3>Query failed:</h3><br><p>$query</p></div>";
+        if (strlen($query) > 0) {
+            if (!($wpdb->query($query))) {
+                // if a query fails
+                return "<div><h3>Query failed:</h3><br><p>$query</p></div>";
+            }
         }
     }
 
