@@ -3,3 +3,37 @@
  * This file contains the code for generating the plugin settings page
  */
 
+require 'db_init.php';
+
+const sql_file = "database_structure.sql";
+
+// This function implements the custom action called when the create tables button is clicked
+function aah_create_tables_action() {
+    $result = "";
+    $result = aah_create_tables(sql_file);
+    echo $result;
+    die( __FUNCTION__ );
+}
+
+// hook to add custom action
+add_action( 'admin_post_aah_create_tables', 'aah_create_tables_action' );
+
+function aah_configure_settings_page() {
+    add_options_page( "Adopt-a-Hemlock Settings", "Create Database Tables",
+        "manage_options", "aah-tables-menu", "aah_render_tables_create_page");
+}
+
+// hook to add settings to admin menu
+add_action( 'admin_menu', 'dbi_add_settings_page' );
+
+function aah_render_tables_create_page() {
+    ?>
+
+    <h2>Create Database Tables</h2>
+
+    <form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post">
+        <input type="hidden" name="action" value="aah_create_tables">
+        <?php submit_button( 'Create' ); ?>
+    </form>
+    <?php
+}
