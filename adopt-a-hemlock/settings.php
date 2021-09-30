@@ -65,11 +65,11 @@ function aah_render_tables_create_page() {
 <!--    </form>-->
     <script type="text/javascript">
         jQuery(document).ready(function($) {
-            $('.aah-create-tables').on('click', '.aah-create-tables-button', function (event) {
+            $('.aah-create-tables-button').click( function (event) {
                 var data = {
                     'action': 'aah_ajax_create_tables',
                 };
-                jQuery.post(ajaxurl, data, function(response) {
+                $.post(ajaxurl, data, function(response) {
                     if(response['success'] == 'true') {
                         alert('Tables created successfully');
                     } else {
@@ -78,7 +78,7 @@ function aah_render_tables_create_page() {
                     }
                 });
             });
-        )};
+            });
     </script>
     </div>
     <?php
