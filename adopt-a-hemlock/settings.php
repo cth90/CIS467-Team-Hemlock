@@ -60,7 +60,7 @@ function aah_render_tables_create_page() {
 
     <h2>Create Database Tables</h2>
 
-    <form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="post">
+    <form action="" method="post">
         <input type="hidden" name="action" value="aah_create_tables">
         <?php submit_button( 'Create' ); ?>
     </form>
