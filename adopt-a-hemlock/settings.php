@@ -23,12 +23,13 @@ function aah_create_tables_request_ajax() { ?>
                 'action': 'aah_ajax_create_tables',
             };
             jQuery.post(ajaxurl, data, function(response) {
-                if(response['success'] == 'true') {
-                    alert('Tables created successfully');
-                } else {
-                    var error = (response['error'] ? response['error'] : 'unknown');
-                    alert(`Table creation failed with error: ${error}`);
-                }
+                // if(response['success'] == 'true') {
+                //     alert('Tables created successfully');
+                // } else {
+                //     var error = (response['error'] ? response['error'] : 'unknown');
+                //     alert(`Table creation failed with error: ${error}`);
+                // }
+                alert(response);
             });
         });
     </script><?php
