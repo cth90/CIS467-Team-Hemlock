@@ -23,13 +23,12 @@ function aah_create_tables_request_ajax() { ?>
                 'action': 'aah_ajax_create_tables',
             };
             jQuery.post("admin-ajax.php", data, function(response) {
-                // if(response['success'] == 'true') {
-                //     alert('Tables created successfully');
-                // } else {
-                //     var error = (response['error'] ? response['error'] : 'unknown');
-                //     alert(`Table creation failed with error: ${error}`);
-                // }
-                alert(response);
+                if(response['success'] == 'true') {
+                    alert('Tables created successfully');
+                } else {
+                    var error = (response['error'] ? response['error'] : 'unknown');
+                    alert(`Table creation failed with error: ${error}`);
+                }
             });
         });
     </script><?php
@@ -45,7 +44,7 @@ add_action('wp_ajax_aah_ajax_create_tables', 'aah_create_tables_action_ajax');
 
 
 // hook to add custom action
-add_action( 'admin_post_aah_create_tables', 'aah_create_tables_request_ajax' );
+//add_action( 'admin_post_aah_create_tables', 'aah_create_tables_request_ajax' );
 
 function aah_configure_settings_page() {
     add_menu_page( "Adopt-a-Hemlock Settings", "Adopt-a-Hemlock Settings",
@@ -57,12 +56,30 @@ add_action( 'admin_menu', 'aah_configure_settings_page' );
 
 function aah_render_tables_create_page() {
     ?>
-
+    <div class="aah-create-tables">
     <h2>Create Database Tables</h2>
-
-    <form action="" method="post">
-        <input type="hidden" name="action" value="aah_create_tables">
-        <?php submit_button( 'Create' ); ?>
-    </form>
+    <button class="aah-create-tables-button">Create Tables</button>
+<!--    <form action="--><?php //echo admin_url( 'admin-post.php' ); ?><!--" method="post">-->
+<!--        <input type="hidden" name="action" value="aah_create_tables">-->
+<!--        --><?php //submit_button( 'Create' ); ?>
+<!--    </form>-->
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('.aah-create-tables').on('click', '.aah-create-tables-button', function (event) {
+                var data = {
+                    'action': 'aah_ajax_create_tables',
+                };
+                jQuery.post(ajaxurl, data, function(response) {
+                    if(response['success'] == 'true') {
+                        alert('Tables created successfully');
+                    } else {
+                        var error = (response['error'] ? response['error'] : 'unknown');
+                        alert(`Table creation failed with error: ${error}`);
+                    }
+                });
+            });
+        }
+    </script>
+    </div>
     <?php
 }
