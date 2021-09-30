@@ -7,45 +7,15 @@ require 'db_init.php';
 
 define("sql_file", plugin_dir_path(__FILE__) . "database_structure.sql");
 
-// This function implements the custom action called when the create tables button is clicked
-function aah_create_tables_action() {
-    $result = "";
-    $result = aah_create_tables(sql_file);
-    echo $result;
-    die( __FUNCTION__ );
-}
-
-// This is an ajax request to create the tables
-function aah_create_tables_request_ajax() { ?>
-    <script type="text/javascript">
-        jQuery(document).ready(function($) {
-            var data = {
-                'action': 'aah_ajax_create_tables',
-            };
-            jQuery.post("admin-ajax.php", data, function(response) {
-                if(response['success'] == 'true') {
-                    alert('Tables created successfully');
-                } else {
-                    var error = (response['error'] ? response['error'] : 'unknown');
-                    alert(`Table creation failed with error: ${error}`);
-                }
-            });
-        });
-    </script><?php
-}
-
 // This is an ajax action to create the tables
 function aah_create_tables_action_ajax() {
-    $result = aah_create_tables_ajax(sql_file);
+    $result = aah_create_tables(sql_file);
     wp_send_json($result);
-    //wp_die();
 }
+// Add the ajax action
 add_action('wp_ajax_aah_ajax_create_tables', 'aah_create_tables_action_ajax');
 
-
-// hook to add custom action
-//add_action( 'admin_post_aah_create_tables', 'aah_create_tables_request_ajax' );
-
+// This adds the menu page for our plugin
 function aah_configure_settings_page() {
     add_menu_page( "Adopt-a-Hemlock Settings", "Adopt-a-Hemlock Settings",
         "manage_options", "adopt-a-hemlock", "aah_render_tables_create_page");
@@ -54,6 +24,7 @@ function aah_configure_settings_page() {
 // hook to add settings to admin menu
 add_action( 'admin_menu', 'aah_configure_settings_page' );
 
+// This renders the settings page
 function aah_render_tables_create_page() {
     ?>
     <div class="aah-create-tables">
@@ -70,7 +41,7 @@ function aah_render_tables_create_page() {
                     'action': 'aah_ajax_create_tables',
                 };
                 $.post(ajaxurl, data, function(response) {
-                    if(response['success'] == 'true') {
+                    if(response['success'] == "true") {
                         alert('Tables created successfully');
                     } else {
                         var error = (response['error'] ? response['error'] : 'unknown');
