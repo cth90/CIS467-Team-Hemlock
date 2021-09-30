@@ -24,7 +24,7 @@ function aah_configure_settings_page() {
 }
 
 // hook to add settings to admin menu
-add_action( 'admin_menu', 'dbi_add_settings_page' );
+add_action( 'admin_menu', 'aah_configure_settings_page' );
 
 function aah_render_tables_create_page() {
     ?>
