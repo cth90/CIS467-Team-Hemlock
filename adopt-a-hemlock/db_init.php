@@ -37,8 +37,8 @@ function aah_create_tables($sql_file)
 function aah_create_tables_ajax($sql_file) {
     $result = aah_create_tables($sql_file);
     if ($result != "<div><h3>Successfully created tables!</h3></div>") {
-        return json_encode(array("success"=>"true", "error"=>"none"));
+        return array("success"=>"true", "error"=>"none");
     } else {
-        return json_encode(array("success"=>"false", "error"=>"test error"));
+        return array("success"=>"false", "error"=>"test error");
     }
 }
