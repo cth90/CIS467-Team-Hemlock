@@ -18,7 +18,6 @@ function aah_create_tables_action() {
 // This is an ajax request to create the tables
 function aah_create_tables_request_ajax() { ?>
     <script type="text/javascript">
-        alert('test');
         jQuery(document).ready(function($) {
             var data = {
                 'action': 'aah_ajax_create_tables',
@@ -38,7 +37,7 @@ function aah_create_tables_request_ajax() { ?>
 // This is an ajax action to create the tables
 function aah_create_tables_action_ajax() {
     $result = aah_create_tables_ajax(sql_file);
-    echo $result;
+    wp_send_json($result);
     //wp_die();
 }
 add_action('wp_ajax_aah_ajax_create_tables', 'aah_create_tables_action_ajax');
