@@ -18,6 +18,7 @@ function aah_create_tables_action() {
 // This is an ajax request to create the tables
 function aah_create_tables_request_ajax() { ?>
     <script type="text/javascript">
+        alert('test');
         jQuery(document).ready(function($) {
             var data = {
                 'action': 'aah_ajax_create_tables',
