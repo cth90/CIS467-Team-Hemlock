@@ -39,7 +39,7 @@ function aah_create_tables_request_ajax() { ?>
 function aah_create_tables_action_ajax() {
     $result = aah_create_tables_ajax(sql_file);
     echo $result;
-    wp_die();
+    //wp_die();
 }
 add_action('wp_ajax_aah_ajax_create_tables', 'aah_create_tables_action_ajax');
 
