@@ -5,7 +5,7 @@
 
 require 'db_init.php';
 
-const sql_file = "database_structure.sql";
+define("sql_file", plugin_dir_path(__FILE__) . "database_structure.sql");
 
 // This function implements the custom action called when the create tables button is clicked
 function aah_create_tables_action() {
@@ -19,8 +19,8 @@ function aah_create_tables_action() {
 add_action( 'admin_post_aah_create_tables', 'aah_create_tables_action' );
 
 function aah_configure_settings_page() {
-    add_options_page( "Adopt-a-Hemlock Settings", "Create Database Tables",
-        "manage_options", "aah-tables-menu", "aah_render_tables_create_page");
+    add_menu_page( "Adopt-a-Hemlock Settings", "Create Database Tables",
+        "manage_options", "adopt-a-hemlock", "aah_render_tables_create_page");
 }
 
 // hook to add settings to admin menu
