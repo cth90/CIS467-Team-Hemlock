@@ -78,10 +78,11 @@ function aah_read_csv($csv_file) {
         // Read each line and parse it
         while (($data = fgetcsv($handle)) !== FALSE) {
             if (($tree_info = aah_parse_line($data, $line_headers)) != FALSE) {
-                $row_count++;
                 if (aah_insert_tree($tree_info) != 1) {
                     $error_line = $row_count + 1;
                     trigger_error("Error adding tree at $error_line");
+                } else {
+                    $row_count++;
                 }
             } else  {
                 // Line parse error, row count + 2 is to account for the header line
