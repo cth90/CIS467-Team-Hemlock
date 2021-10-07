@@ -12,22 +12,22 @@ define("csv_files", array(plugin_dir_path(__FILE__) . "cemetery_and_mulligan.csv
 // This is an ajax action to create the tables
 function aah_create_tables_action_ajax()
 {
-    $final_result['success'] = "false";
+    $final_result['success'] = 'false';
 
     $result = aah_create_tables(sql_file);
 
-    if ($result['success'] == "true") {
+    if ($result['success'] == 'true') {
         $populate_result = aah_read_csv(csv_files[0]);
         if ($populate_result <= 0) {
             $final_result['error'] = error_get_last()['message'];
-            $final_result['success'] = "false";
+            $final_result['success'] = 'false';
         } else {
             $populate_result = aah_read_csv(csv_files[1]);
             if ($populate_result <= 0) {
                 $final_result['error'] = error_get_last()['message'];
-                $final_result['success'] = "false";
+                $final_result['success'] = 'false';
             } else {
-                $final_result['success'] = "true";
+                $final_result['success'] = 'true';
             }
         }
     }
@@ -62,7 +62,7 @@ function aah_render_tables_create_page()
                         'action': 'aah_ajax_create_tables',
                     };
                     $.post(ajaxurl, data, function (response) {
-                        if (response['success'] == "true") {
+                        if (response['success'] == 'true') {
                             alert('Tables created and populated successfully');
                         } else {
                             var error = (response['error'] ? response['error'] : 'unknown');
