@@ -80,7 +80,7 @@ function aah_read_csv($csv_file) {
             if (($tree_info = aah_parse_line($data, $line_headers)) != FALSE) {
                 if (aah_insert_tree($tree_info) != 1) {
                     $error_line = $row_count + 1;
-                    trigger_error("Error adding tree at $error_line");
+                    //trigger_error("Error adding tree at $error_line");
                 } else {
                     $row_count++;
                 }
@@ -88,7 +88,7 @@ function aah_read_csv($csv_file) {
                 // Line parse error, row count + 2 is to account for the header line
                 // Continues execution
                 $error_line = $row_count + 2;
-                trigger_error("Error parsing tree at line $error_line");
+                //trigger_error("Error parsing tree at line $error_line");
             }
         }
         fclose($handle);
