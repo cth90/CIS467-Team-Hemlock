@@ -112,6 +112,9 @@ function aah_get_line_headers($first_line) {
         if (!is_null($new_header)) {
             $new_header = LOCATIONS_HEADERS_MAP[$modified_header];
         }
+        if (!is_null($new_header)) {
+            $new_header = 'ignored';
+        }
         $line_headers[] = $new_header;
     }
 
