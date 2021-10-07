@@ -1,11 +1,5 @@
 CREATE TABLE `aah_trees` (
   `tag` int PRIMARY KEY,
-  `surveyor_id` int,
-  `survey_date` datetime,
-  `county_id` int,
-  `acreage` float,
-  `parcel` varchar(255),
-  `address` varchar(255),
   `dbh` int,
   `latitude` float,
   `longitude` float,
@@ -13,25 +7,19 @@ CREATE TABLE `aah_trees` (
   `notes` varchar(255)
 );
 
-CREATE TABLE `aah_counties` (
-  `id` int PRIMARY KEY,
-  `county` varchar(255)
-);
-
-CREATE TABLE `aah_surveyor` (
-  `id` int PRIMARY KEY,
-  `name` varchar(255)
-);
-
 CREATE TABLE `aah_locations` (
-  `id` int PRIMARY KEY,
-  `name` varchar(255)
+  `id` int AUTO_INCREMENT,
+  `name` varchar(255),
+  `parcel` varchar(255),
+  `address` varchar(255),
+  PRIMARY KEY (id)
 );
 
 CREATE TABLE `aah_customers` (
   `id` int PRIMARY KEY,
   `first_name` varchar(255),
-  `last_name` varchar(255)
+  `last_name` varchar(255),
+  `anonymous` boolean
 );
 
 CREATE TABLE `aah_transactions` (
@@ -41,10 +29,6 @@ CREATE TABLE `aah_transactions` (
   `customer_id` int,
   `anonymous` boolean
 );
-
-ALTER TABLE `aah_trees` ADD FOREIGN KEY (`surveyor_id`) REFERENCES `aah_surveyor` (`id`);
-
-ALTER TABLE `aah_trees` ADD FOREIGN KEY (`county_id`) REFERENCES `aah_counties` (`id`);
 
 ALTER TABLE `aah_transactions` ADD FOREIGN KEY (`customer_id`) REFERENCES `aah_customers` (`id`);
 
