@@ -1,8 +1,6 @@
-SET FOREIGN_KEY_CHECKS = 0;
+drop table if exists `aah_transactions`;
 drop table if exists `aah_trees`;
 drop table if exists `aah_locations`;
-drop table if exists `aah_transactions`;
-SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE `aah_trees`
 (
