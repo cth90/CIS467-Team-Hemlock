@@ -19,7 +19,7 @@ function aah_create_tables_action_ajax()
     if ($result['success'] == 'true') {
         $populate_result = aah_read_csv(csv_files[0]);
         if ($populate_result <= 0) {
-            $final_result['error'] = error_get_last()['message'];
+            $final_result['error'] = error_get_last();
             $final_result['success'] = 'false';
         } else {
             $populate_result = aah_read_csv(csv_files[1]);
