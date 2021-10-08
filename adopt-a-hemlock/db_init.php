@@ -125,7 +125,13 @@ function aah_get_line_headers($first_line) {
 function aah_parse_line($line, $headers) {
     $values = array();
     for ($i = 0; $i <= count($headers); $i++) {
-        $values[REQUIRED_FIELDS_LIST[$headers[$i]]] = $line[$i];
+        if (array_key_exists($headers[$i], REQUIRED_FIELDS_LIST)) {
+            $new_value = $line[$i];
+            if (is_null($new_value)) {
+                $new_value = '';
+            }
+            $values[REQUIRED_FIELDS_LIST[$headers[$i]]] = $new_value;
+        }
     }
     return $values;
 }
