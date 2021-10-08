@@ -104,11 +104,7 @@ function aah_get_line_headers($first_line) {
 
     foreach ($first_line as $header) {
         $modified_header = strtolower(trim($header));
-        $new_header = CSV_HEADERS_MAP[$modified_header];
-        if (!is_null($new_header)) {
-            $new_header = 'ignored';
-        }
-        $line_headers[] = $new_header;
+        $line_headers[] = (CSV_HEADERS_MAP[$modified_header] ?? 'ignored');
     }
 
     return $line_headers;
@@ -116,14 +112,10 @@ function aah_get_line_headers($first_line) {
 
 // Parse a single line from the csv file
 function aah_parse_line($line, $headers) {
-    $values = array();
+    $values = array(0=>'',1=>'',2=>'',3=>'',4=>'',5=>'',6=>'');
     for ($i = 0; $i < count($headers); $i++) {
         if (array_key_exists($headers[$i], REQUIRED_FIELDS_LIST)) {
-            $new_value = $line[$i];
-            if (is_null($new_value)) {
-                $new_value = '';
-            }
-            $values[REQUIRED_FIELDS_LIST[$headers[$i]]] = $new_value;
+            $values[REQUIRED_FIELDS_LIST[$headers[$i]]] = ($line[$i] ?? '');
         }
     }
     return $values;
