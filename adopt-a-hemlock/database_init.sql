@@ -1,10 +1,16 @@
+SET FOREIGN_KEY_CHECKS = 0;
+drop table if exists `aah_trees`;
+drop table if exists `aah_locations`;
+drop table if exists `aah_transactions`;
+SET FOREIGN_KEY_CHECKS = 1;
+
 CREATE TABLE `aah_trees`
 (
     `id`          int AUTO_INCREMENT,
     `tag`         varchar(8),
     `dbh`         int,
-    `latitude`    float,
-    `longitude`   float,
+    `latitude`    varchar(255),
+    `longitude`   varchar(255),
     `location_id` int,
     `notes`       varchar(255),
     PRIMARY KEY (id)
@@ -19,25 +25,16 @@ CREATE TABLE `aah_locations`
     PRIMARY KEY (id)
 );
 
-CREATE TABLE `aah_customers`
-(
-    `id`         int PRIMARY KEY,
-    `first_name` varchar(255),
-    `last_name`  varchar(255),
-    `anonymous`  boolean
-);
-
 CREATE TABLE `aah_transactions`
 (
-    `id`          int PRIMARY KEY,
-    `paypal_id`   int,
+    `id`          int AUTO_INCREMENT,
+    `name`        varchar(255),
+    `payment_id`  int,
+    `amt_donated` DECIMAL(13, 2),
     `tree_id`     int,
-    `customer_id` int,
-    `anonymous`   boolean
+    `anonymous`   boolean,
+    PRIMARY KEY (id)
 );
-
-ALTER TABLE `aah_transactions`
-    ADD FOREIGN KEY (`customer_id`) REFERENCES `aah_customers` (`id`);
 
 ALTER TABLE `aah_transactions`
     ADD FOREIGN KEY (`tree_id`) REFERENCES `aah_trees` (`id`);

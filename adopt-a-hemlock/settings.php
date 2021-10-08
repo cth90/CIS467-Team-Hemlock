@@ -5,15 +5,13 @@
 
 require 'db_init.php';
 
-define("sql_file", plugin_dir_path(__FILE__) . "database_structure.sql");
+define("sql_file", plugin_dir_path(__FILE__) . "database_init.sql");
 define("csv_files", array(plugin_dir_path(__FILE__) . "cemetery_and_mulligan.csv",
     plugin_dir_path(__FILE__) . "duncan.csv"));
 
 // This is an ajax action to create the tables
 function aah_create_tables_action_ajax()
 {
-    $final_result['success'] = 'false';
-
     $result = aah_create_tables(sql_file);
 
     if ($result['success'] == 'true') {
@@ -30,6 +28,9 @@ function aah_create_tables_action_ajax()
                 $final_result['success'] = 'true';
             }
         }
+    } else {
+        $final_result['error'] = implode(", ", error_get_last());
+        $final_result['success'] = 'false';
     }
 
     wp_send_json($final_result);
