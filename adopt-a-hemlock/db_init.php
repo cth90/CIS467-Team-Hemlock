@@ -5,13 +5,9 @@
  */
 
 // This maps the headers from the csv file to table fields
-const TREE_HEADERS_MAP = array(
+const CSV_HEADERS_MAP = array(
     'tag' => 'tag', 'tag #' => 'tag', 'dbh' => 'dbh', 'latitude' => 'latitude', 'lat' => 'latitude',
-    'longitude' => 'longitude', 'long' => 'longitude', 'notes' => 'notes'
-);
-
-// This maps the headers from the csv file to table fields
-const LOCATIONS_HEADERS_MAP = array(
+    'longitude' => 'longitude', 'long' => 'longitude', 'notes' => 'notes',
     'parcel' => 'parcel', 'parcel #' => 'parcel','address' => 'address', 'starting address' => 'address'
 );
 
@@ -108,10 +104,7 @@ function aah_get_line_headers($first_line) {
 
     foreach ($first_line as $header) {
         $modified_header = strtolower(trim($header));
-        $new_header = TREE_HEADERS_MAP[$modified_header];
-        if (!is_null($new_header)) {
-            $new_header = LOCATIONS_HEADERS_MAP[$modified_header];
-        }
+        $new_header = CSV_HEADERS_MAP[$modified_header];
         if (!is_null($new_header)) {
             $new_header = 'ignored';
         }
