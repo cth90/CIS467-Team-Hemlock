@@ -1,6 +1,6 @@
 CREATE TABLE `aah_trees`
 (
-    `id`          int AUTO INCREMENT,
+    `id`          int AUTO_INCREMENT,
     `tag`         varchar(8),
     `dbh`         int,
     `latitude`    float,
