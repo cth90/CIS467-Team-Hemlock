@@ -17,7 +17,7 @@ const REQUIRED_FIELDS_LIST = array(
 );
 
 const SQL_INSERT_TEMPLATE = 'INSERT INTO aah_trees (tag, dbh, latitude, longitude, notes, location_id)
-SELECT %d, %d, %f, %f, %s, id
+SELECT %s, %d, %f, %f, %s, id
   FROM aah_locations
  WHERE parcel = %s or address = %s
  LIMIT 1';
