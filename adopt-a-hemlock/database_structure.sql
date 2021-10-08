@@ -40,7 +40,7 @@ ALTER TABLE `aah_transactions`
     ADD FOREIGN KEY (`customer_id`) REFERENCES `aah_customers` (`id`);
 
 ALTER TABLE `aah_transactions`
-    ADD FOREIGN KEY (`tree_id`) REFERENCES `aah_trees` (`tag`);
+    ADD FOREIGN KEY (`tree_id`) REFERENCES `aah_trees` (`id`);
 
 ALTER TABLE `aah_trees`
     ADD FOREIGN KEY (`location_id`) REFERENCES `aah_locations` (`id`);
