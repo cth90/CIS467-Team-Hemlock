@@ -61,16 +61,14 @@ function aah_get_tree_by_shortcode($atts)
 {
     // placeholder tree if no tree is returned
     $no_tree = array(
-        0=>'none', // id
-        1=>'none', // tag
-        2=>'none', // dbh
-        3=>'none', // latitude
-        4=>'none', // longitude
-        5=>'none', // notes
-        6=>'none', // location name
-        7=>'none', // location address
-        8=>'none', // location parcel
-        9=>false   // adopted
+        'id'=>'none',
+        'tag'=>'none',
+        'dbh'=>'none',
+        'latitude'=>'none',
+        'longitude'=>'none',
+        'notes'=>'none',
+        'location_id'=>-1,
+        'adopted'=>false
     );
 
     // If unadopted tree is requested
@@ -89,6 +87,25 @@ function aah_get_tree_by_shortcode($atts)
 }
 add_shortcode('tree_info', 'aah_get_tree_by_shortcode');
 
+// Get tree info using ajax hook
+function aah_get_tree_info_ajax() {
+    $params = array();
+    if (isset($_POST['tree_tag'])) {
+        $params['tag'] = $_GET['tree_tag'];
+    }
+    if (isset($_POST['tree_location'])) {
+        $params['location'] = $_GET['tree_location'];
+    }
+    if (isset($_POST['tree_unadopted'])) {
+        $params['unadopted'] = $_GET['tree_unadopted'];
+    }
+    $result = aah_get_tree_by_shortcode($params);
+    wp_send_json($result);
+}
+// Add the hooks for the ajax action
+add_action('wp_ajax_aah_get_tree_info', 'aah_get_tree_info_ajax');
+add_action('wp_ajax_nopriv_aah_get_tree_info', 'aah_get_tree_info_ajax');
+
 // Get all adopted trees
 function aah_get_all_adopted_trees()
 {
@@ -99,6 +116,11 @@ function aah_get_all_adopted_trees()
         return false;
     }
     return $result;
+}
+
+// Get array of locations
+function aah_get_locations() {
+    // todo get locations
 }
 
 // Return the number of trees in a specified location
