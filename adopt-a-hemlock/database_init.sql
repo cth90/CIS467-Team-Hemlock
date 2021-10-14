@@ -5,13 +5,14 @@ drop table if exists `aah_locations`;
 CREATE TABLE `aah_trees`
 (
     `id`          int AUTO_INCREMENT,
-    `tag`         varchar(8),
+    `tag`         varchar(8) NOT NULL,
     `dbh`         int,
     `latitude`    varchar(255),
     `longitude`   varchar(255),
     `location_id` int,
     `notes`       varchar(255),
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    UNIQUE (tag)
 );
 
 CREATE TABLE `aah_locations`
@@ -29,9 +30,10 @@ CREATE TABLE `aah_transactions`
     `name`        varchar(255),
     `payment_id`  int,
     `amt_donated` DECIMAL(13, 2),
-    `tree_id`     int,
     `anonymous`   boolean,
-    PRIMARY KEY (id)
+	`tree_id`     int,
+    PRIMARY KEY (id),
+	UNIQUE (tree_id)
 );
 
 ALTER TABLE `aah_transactions`
