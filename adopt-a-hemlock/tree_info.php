@@ -59,18 +59,18 @@ SELECT c.id FROM `aah_locations` c WHERE %s IN (id, name, parcel, address)) LIMI
 // Accepts a tag, location, or nothing, in that order of priority.
 function aah_get_tree_by_shortcode($atts)
 {
-    // todo placeholder tree
+    // placeholder tree if no tree is returned
     $no_tree = array(
-        'id'=>'none',
-        'tag'=>'none',
-        'dbh'=>'none',
-        'latitude'=>'none',
-        'longitude'=>'none',
-        'notes'=>'none',
-        'location name'=>'none',
-        'location address'=>'none',
-        'location parcel'=>'none',
-        'adopted'=>false
+        0=>'none', // id
+        1=>'none', // tag
+        2=>'none', // dbh
+        3=>'none', // latitude
+        4=>'none', // longitude
+        5=>'none', // notes
+        6=>'none', // location name
+        7=>'none', // location address
+        8=>'none', // location parcel
+        9=>false   // adopted
     );
 
     // If unadopted tree is requested
@@ -100,6 +100,18 @@ function aah_get_all_adopted_trees()
     }
     return $result;
 }
+
+// Return the number of trees in a specified location
+function aah_get_tree_count_by_location($attr) {
+    $count = 0;
+    if (isset($attr['location'])) {
+        global $wpdb;
+        $sql = 'SELECT COUNT(id) FROM `aah_trees` WHERE location_id IN (SELECT id FROM `aah_locations` WHERE name = %s)';
+        $count = $wpdb->get_var($wpdb->prepare($sql, $attr['location'])) ?? 0;
+    }
+    return $count;
+}
+add_shortcode('tree_count', 'aah_get_tree_count_by_location');
 
 // Create a dummy transaction to adopt a tree by its id (not tag) for development purposes
 function aah_adopt_tree_by_id($tree_id)
