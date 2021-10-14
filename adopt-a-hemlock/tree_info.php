@@ -29,6 +29,18 @@ function aah_get_unadopted_tree_by_tag($tag)
     return $result;
 }
 
+// Get one tree by its tag
+function aah_get_tree_by_tag($tag)
+{
+    global $wpdb;
+    $sql = 'SELECT a.* FROM `aah_trees` a WHERE a.tag = %s LIMIT 1';
+    if (!($result = $wpdb->get_row($wpdb->prepare($sql, $tag), ARRAY_A))) {
+        trigger_error("No tree found.");
+        return false;
+    }
+    return $result;
+}
+
 // Get one unadopted tree by area, using any of area id, name, parcel, or address
 function aah_get_any_unadopted_tree_by_area($area)
 {
@@ -48,17 +60,34 @@ SELECT c.id FROM `aah_locations` c WHERE %s IN (id, name, parcel, address)) LIMI
 function aah_get_tree_by_shortcode($atts)
 {
     // todo placeholder tree
-    $no_tree = array();
-    if (isset($atts['tag'])) {
-        $tree_info = (aah_get_unadopted_tree_by_tag($atts['tag']) ?? $no_tree);
-    } else if (isset($atts['location'])) {
-        $tree_info = (aah_get_unadopted_tree_by_tag($atts['tag']) ?? $no_tree);
-    } else {
-        $tree_info = (aah_get_any_unadopted_tree() ?? $no_tree);
+    $no_tree = array(
+        'id'=>'none',
+        'tag'=>'none',
+        'dbh'=>'none',
+        'latitude'=>'none',
+        'longitude'=>'none',
+        'notes'=>'none',
+        'location name'=>'none',
+        'location address'=>'none',
+        'location parcel'=>'none',
+        'adopted'=>false
+    );
+
+    // If unadopted tree is requested
+    if (isset($atts['unadopted']) && $atts['unadopted'] == true) {
+        if (isset($atts['tag'])) {
+            $tree_info = (aah_get_unadopted_tree_by_tag($atts['tag']) ?? $no_tree);
+        } else if (isset($atts['location'])) {
+            $tree_info = (aah_get_unadopted_tree_by_tag($atts['tag']) ?? $no_tree);
+        } else {
+            $tree_info = (aah_get_any_unadopted_tree() ?? $no_tree);
+        }
+    } else { // otherwise get a tree by tag only
+        $tree_info = (aah_get_tree_by_tag($atts['tag']) ?? $no_tree);
     }
     return aah_render_tree_info($tree_info);
 }
-add_shortcode('unadopted_tree', 'aah_get_tree_by_shortcode');
+add_shortcode('tree_info', 'aah_get_tree_by_shortcode');
 
 // Get all adopted trees
 function aah_get_all_adopted_trees()
