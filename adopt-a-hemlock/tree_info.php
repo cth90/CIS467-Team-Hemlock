@@ -99,7 +99,8 @@ function aah_get_tree_info_ajax() {
     if (isset($_POST['tree_unadopted'])) {
         $params['unadopted'] = $_GET['tree_unadopted'];
     }
-    $result = aah_get_tree_by_shortcode($params);
+    //$result = aah_get_tree_by_shortcode($params);
+    $result = $params;
     wp_send_json($result);
 }
 // Add the hooks for the ajax action
