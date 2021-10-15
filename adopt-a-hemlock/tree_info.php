@@ -55,9 +55,11 @@ SELECT c.id FROM `aah_locations` c WHERE %s IN (id, name, parcel, address)) LIMI
     return $result;
 }
 
-// This is the shortcode function called when the unadopted_tree shortcode is used.
-// Accepts a tag, location, or nothing, in that order of priority.
-function aah_get_tree_by_shortcode($atts)
+// This returns info for a tree.
+// Can return only unadopted trees, or any tree by tag.
+// If unadopted is set to true, it will return a random unadopted tree
+// or one that matches the location or tag.
+function aah_get_tree_info($atts)
 {
     // placeholder tree if no tree is returned
     $no_tree = array(
@@ -68,7 +70,6 @@ function aah_get_tree_by_shortcode($atts)
         'longitude'=>'none',
         'notes'=>'none',
         'location_id'=>-1,
-        'adopted'=>false
     );
 
     // If unadopted tree is requested
@@ -83,6 +84,8 @@ function aah_get_tree_by_shortcode($atts)
     } else { // otherwise get a tree by tag only
         $tree_info = (aah_get_tree_by_tag($atts['tag']) ?? $no_tree);
     }
+    $tree_info['location'] = (aah_get_location_name($tree_info['location_id']) ?? 'Unknown');
+    $tree_info['adopted'] = aah_get_tree_is_adopted($tree_info['id']);
     return $tree_info;
 }
 //add_shortcode('tree_info', 'aah_get_tree_by_shortcode');
@@ -99,7 +102,7 @@ function aah_get_tree_info_ajax() {
     if (isset($_POST['tree_unadopted'])) {
         $params['unadopted'] = $_POST['tree_unadopted'];
     }
-    $result = aah_get_tree_by_shortcode($params);
+    $result = aah_get_tree_info($params);
     wp_send_json($result);
 }
 // Add the hooks for the ajax action
@@ -120,7 +123,32 @@ function aah_get_all_adopted_trees()
 
 // Get array of locations
 function aah_get_locations() {
-    // todo get locations
+    global $wpdb;
+    $sql = 'SELECT * FROM `aah_locations`';
+    if (!($result = $wpdb->get_results($sql, ARRAY_A))) {
+        trigger_error("No locations found.");
+        return false;
+    }
+    return $result;
+}
+
+// Get location name by id
+function aah_get_location_name($id) {
+    if ($id < 0) { return 0; }
+    global $wpdb;
+    $sql = 'SELECT name FROM `aah_locations` WHERE id = %d';
+    if (!($result = $wpdb->get_row($wpdb->prepare($sql, $id), ARRAY_N))) {
+        trigger_error("No matching location found.");
+        return 0;
+    }
+    return $result[0];
+}
+
+// Returns 1 if the tree specified by $id is adopted, else 0
+function aah_get_tree_is_adopted($id) {
+    global $wpdb;
+    $sql = 'SELECT 1 FROM `aah_transactions` WHERE tree_id = %d';
+    return $wpdb->get_row($wpdb->prepare($sql, $id), ARRAY_A);
 }
 
 // Return the number of trees in a specified location
