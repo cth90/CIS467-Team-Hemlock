@@ -27,7 +27,7 @@ function aah_render_tree_lookup()
         <label>Tag: </label>
         <div style="display:inline" class="tree-tag"></div>
         <br>
-        <label>Adopted <input type="checkbox" class="tree-adopted" name="adopted" disabled></label>
+        <label>Adopted <input type="checkbox" class="tree-adopted" name="adopted"></label>
         <br>
         <label>DBH: </label>
         <div style="display:inline" class="tree-dbh"></div>
