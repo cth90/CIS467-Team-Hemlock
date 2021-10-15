@@ -28,7 +28,6 @@ function aah_render_tree_lookup()
         <div style="display:inline" class="tree-tag"></div>
         <br>
         <label>Adopted <input type="checkbox" class="tree-adopted" name="adopted" disabled></label>
-        <div style="display:inline" class="tree-adopted-test"></div>
         <br>
         <label>DBH: </label>
         <div style="display:inline" class="tree-dbh"></div>
@@ -62,7 +61,6 @@ function aah_render_tree_lookup()
                     if (response['adopted'] == 1) {
                         $(div).find(".tree-adopted").prop('checked', true);
                     }
-                    $(div).find(".tree-adopted-test").html(response['adopted']);
                     $(div).show();
                 });
             });
