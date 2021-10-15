@@ -17,7 +17,7 @@ function aah_render_tree_lookup()
                 <input name="tree_tag" type="text">
             </div>
             <input type="hidden" name="action" value="aah_get_tree_info">
-            <button type="submit">Lookup Tree</button>
+            <button type="button">Lookup Tree</button>
         </form>
     </div>
     <div class="tree-info" style="display:none">
@@ -31,7 +31,7 @@ function aah_render_tree_lookup()
 
     </div>
     <script type="text/javascript">
-        jQuery('form[name="tree-lookup-form"]').on('submit', function () {
+        jQuery('form[name="tree-lookup-form"]').on('button', function () {
             var form_data = jQuery(this).serializeArray();
             $.post(ajaxurl, form_data, function (response) {
                 var div = $(".tree-info");
