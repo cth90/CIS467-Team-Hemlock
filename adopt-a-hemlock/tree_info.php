@@ -145,10 +145,11 @@ function aah_get_location_name($id) {
 }
 
 // Returns 1 if the tree specified by $id is adopted, else 0
-function aah_get_tree_is_adopted($id) {
+function aah_get_tree_is_adopted($id)
+{
     global $wpdb;
     $sql = 'SELECT 1 FROM `aah_transactions` WHERE tree_id = %d';
-    return $wpdb->get_var($wpdb->prepare($sql, $id));
+    return $wpdb->get_var($wpdb->prepare($sql, $id)) ?? 0;
 }
 
 // Return the number of trees in a specified location
