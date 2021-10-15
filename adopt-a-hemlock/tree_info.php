@@ -36,7 +36,7 @@ function aah_get_tree_by_tag($tag)
     $sql = 'SELECT a.* FROM `aah_trees` a WHERE a.tag = %s LIMIT 1';
     if (!($result = $wpdb->get_row($wpdb->prepare($sql, $tag), ARRAY_A))) {
         trigger_error("No tree found.");
-        return $tag;
+        return "tag: $tag";
     }
     return $result;
 }
