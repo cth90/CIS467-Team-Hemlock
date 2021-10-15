@@ -36,7 +36,7 @@ function aah_get_tree_by_tag($tag)
     $sql = 'SELECT a.* FROM `aah_trees` a WHERE a.tag = %s LIMIT 1';
     if (!($result = $wpdb->get_row($wpdb->prepare($sql, $tag), ARRAY_A))) {
         trigger_error("No tree found.");
-        return false;
+        return "test";
     }
     return $result;
 }
@@ -76,7 +76,7 @@ function aah_get_tree_by_shortcode($atts)
         if (isset($atts['tag'])) {
             $tree_info = (aah_get_unadopted_tree_by_tag($atts['tag']) ?? $no_tree);
         } else if (isset($atts['location'])) {
-            $tree_info = (aah_get_unadopted_tree_by_tag($atts['tag']) ?? $no_tree);
+            $tree_info = (aah_get_any_unadopted_tree_by_area($atts['tag']) ?? $no_tree);
         } else {
             $tree_info = (aah_get_any_unadopted_tree() ?? $no_tree);
         }
