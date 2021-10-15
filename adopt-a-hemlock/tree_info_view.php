@@ -58,7 +58,7 @@ function aah_render_tree_lookup()
                     $(div).find(".tree-long").html(response['longitude']);
                     $(div).find(".tree-loc").html(response['location']);
                     $(div).find(".tree-notes").html(response['notes']);
-                    if (response['adopted']) {
+                    if (response['adopted'] == 1) {
                         $(div).find(".tree-adopted").prop('checked', true);
                     }
                     $(div).show();
