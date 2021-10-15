@@ -91,16 +91,15 @@ function aah_get_tree_by_shortcode($atts)
 function aah_get_tree_info_ajax() {
     $params = array();
     if (isset($_POST['tree_tag'])) {
-        $params['tag'] = $_GET['tree_tag'];
+        $params['tag'] = $_POST['tree_tag'];
     }
     if (isset($_POST['tree_location'])) {
-        $params['location'] = $_GET['tree_location'];
+        $params['location'] = $_POST['tree_location'];
     }
     if (isset($_POST['tree_unadopted'])) {
-        $params['unadopted'] = $_GET['tree_unadopted'];
+        $params['unadopted'] = $_POST['tree_unadopted'];
     }
-    //$result = aah_get_tree_by_shortcode($params);
-    $result = $params;
+    $result = aah_get_tree_by_shortcode($params);
     wp_send_json($result);
 }
 // Add the hooks for the ajax action
