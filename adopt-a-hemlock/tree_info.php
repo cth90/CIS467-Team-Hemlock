@@ -83,9 +83,9 @@ function aah_get_tree_by_shortcode($atts)
     } else { // otherwise get a tree by tag only
         $tree_info = (aah_get_tree_by_tag($atts['tag']) ?? $no_tree);
     }
-    return aah_render_tree_info($tree_info);
+    return $tree_info;
 }
-add_shortcode('tree_info', 'aah_get_tree_by_shortcode');
+//add_shortcode('tree_info', 'aah_get_tree_by_shortcode');
 
 // Get tree info using ajax hook
 function aah_get_tree_info_ajax() {
