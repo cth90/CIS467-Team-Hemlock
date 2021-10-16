@@ -6,3 +6,6 @@
 * Version: 0.1
 * Author: Cameron Holly, Mike Day, Brandon Moody
 **/
+
+require 'settings.php';
+require 'tree_info.php';
