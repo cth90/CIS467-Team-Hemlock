@@ -9,4 +9,3 @@
 
 require 'settings.php';
 require 'tree_info.php';
-require 'pdf_generator.php';
