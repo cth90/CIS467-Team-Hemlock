@@ -17,14 +17,13 @@ function aah_render_pdf_generator()
         <button type="button" class="pdf-get-button">Get PDF</button>
     </div>
     <div class="pdf-url">
-
     </div>
     <script type="text/javascript">
         jQuery(document).ready(function ($) {
             $('.pdf-get-button').click(function () {
                 var form_data = jQuery('.pdf-generator-form').serializeArray();
                 $.post(ajaxurl, form_data, function (response) {
-                    $('pdf-url').html('<a href="' + response['url'] + '">PDF</a>');
+                    $('.pdf-url').html('<a href="' + response['url'] + '">PDF</a>');
                 });
             });
         });
