@@ -48,7 +48,8 @@ function aah_get_pdf_by_transaction($transaction_id) {
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     $pdf->AddPage();
     $pdf->writeHTML("<h1>Test: " . $transaction_id . "</h1>");
-    $url = plugin_dir_path(__FILE__) . "pdfs/" . $transaction_id . ".pdf";
-    $pdf->Output($url, "F");
+    $file_path = plugin_dir_path(__FILE__) . "pdfs/" . $transaction_id . ".pdf";
+    $pdf->Output($file_path, "F");
+    $url = get_site_url() . "/wp-content/plugins/adopt-a-hemlock/pdfs/" . $transaction_id . ".pdf";
     return $url;
 }
