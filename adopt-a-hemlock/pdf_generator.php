@@ -1,6 +1,6 @@
 <?php
 require("./TCPDF/tcpdf_autoconfig.php");
-require("./TCPDF/tcpd");
+require("./TCPDF/tcpdf.php");
 
 function aah_render_pdf_generator()
 {
