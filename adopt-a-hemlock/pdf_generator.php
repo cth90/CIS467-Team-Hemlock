@@ -47,9 +47,30 @@ add_action('wp_ajax_nopriv_aah_get_pdf_by_transaction', 'aah_get_pdf_by_transact
 function aah_get_pdf_by_transaction($transaction_id) {
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     $pdf->AddPage();
-    $pdf->writeHTML("<h1>Test: " . $transaction_id . "</h1>");
-    $file_path = plugin_dir_path(__FILE__) . "pdfs/" . $transaction_id . ".pdf";
+    $pdf->writeHTML(aah_get_html(aah_get_transaction_info($transaction_id)));
+    $file_path = get_home_path() . "wp-content/pdfs/" . $transaction_id . ".pdf";
     $pdf->Output($file_path, "F");
-    $url = get_site_url() . "/wp-content/plugins/adopt-a-hemlock/pdfs/" . $transaction_id . ".pdf";
+    $url = content_url() . "/pdfs/" . $transaction_id . ".pdf";
     return $url;
+}
+
+function aah_get_transaction_info($transaction_id) {
+    $info = array(
+        [0]=>'', // name
+        [1]=>'', //date
+        [2]=>'', //tree_tag
+        [3]=>'', //location_name
+        [4]=>'', //location_address
+        [5]=>'', //longitude
+        [6]=>'', //latitude
+        [7]=>'', //donation_amt
+        [8]=>$transaction_id //transaction_id
+    );
+
+    return $info;
+}
+
+function aah_get_html($transaction_info) {
+    $html = "<h1>Test: $transaction_info[8]</h1>";
+    return $html;
 }
