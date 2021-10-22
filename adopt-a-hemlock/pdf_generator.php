@@ -56,15 +56,15 @@ function aah_get_pdf_by_transaction($transaction_id) {
 
 function aah_get_transaction_info($transaction_id) {
     $info = array(
-        [0]=>'', // name
-        [1]=>'', //date
-        [2]=>'', //tree_tag
-        [3]=>'', //location_name
-        [4]=>'', //location_address
-        [5]=>'', //longitude
-        [6]=>'', //latitude
-        [7]=>'', //donation_amt
-        [8]=>$transaction_id //transaction_id
+        0=>'', // name
+        1=>'', //date
+        2=>'', //tree_tag
+        3=>'', //location_name
+        4=>'', //location_address
+        5=>'', //longitude
+        6=>'', //latitude
+        7=>'', //donation_amt
+        8=>$transaction_id //transaction_id
     );
 
     return $info;
