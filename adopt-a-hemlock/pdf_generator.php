@@ -48,9 +48,10 @@ function aah_get_pdf_by_transaction($transaction_id) {
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     $pdf->AddPage();
 
-    // todo write pdf
+
     $info = aah_get_transaction_info($transaction_id);
 
+    // todo write pdf
     $pdf->writeHTML("<h1>Test: $info[8]</h1>");
     $pdf->Image('https://hemlock.omgbbq.org/dev/wp-content/uploads/2021/10/CaligraphyLogo.png');
 
