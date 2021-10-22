@@ -47,7 +47,13 @@ add_action('wp_ajax_nopriv_aah_get_pdf_by_transaction', 'aah_get_pdf_by_transact
 function aah_get_pdf_by_transaction($transaction_id) {
     $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     $pdf->AddPage();
-    $pdf->writeHTML(aah_get_html(aah_get_transaction_info($transaction_id)));
+
+    // todo write pdf
+    $info = aah_get_transaction_info($transaction_id);
+
+    $pdf->writeHTML("<h1>Test: $info[8]</h1>");
+    $pdf->Image('https://hemlock.omgbbq.org/dev/wp-content/uploads/2021/10/CaligraphyLogo.png');
+
     $file_path = get_home_path() . "wp-content/pdfs/" . $transaction_id . ".pdf";
     $pdf->Output($file_path, "F");
     $url = content_url() . "/pdfs/" . $transaction_id . ".pdf";
@@ -68,9 +74,4 @@ function aah_get_transaction_info($transaction_id) {
     );
 
     return $info;
-}
-//design for pdf
-function aah_get_html($transaction_info) {
-    $html = "<h1>Test: $transaction_info[8]</h1><img src='https://hemlock.omgbbq.org/dev/wp-content/uploads/2021/10/CaligraphyLogo.png'>";
-    return $html;
 }
