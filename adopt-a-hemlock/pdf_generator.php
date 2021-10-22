@@ -53,10 +53,10 @@ function aah_get_pdf_by_transaction($transaction_id) {
     $url = content_url() . "/pdfs/" . $transaction_id . ".pdf";
     return $url;
 }
-
+//sql query for each element of the array
 function aah_get_transaction_info($transaction_id) {
     $info = array(
-        0=>'', // name
+        0=>'', //name
         1=>'', //date
         2=>'', //tree_tag
         3=>'', //location_name
@@ -69,8 +69,8 @@ function aah_get_transaction_info($transaction_id) {
 
     return $info;
 }
-
+//design for pdf
 function aah_get_html($transaction_info) {
-    $html = "<h1>Test: $transaction_info[8]</h1>";
+    $html = "<h1>Test: $transaction_info[8]</h1><img src='https://hemlock.omgbbq.org/dev/wp-content/uploads/2021/10/CaligraphyLogo.png'>";
     return $html;
 }
