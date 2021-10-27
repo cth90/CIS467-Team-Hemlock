@@ -7,12 +7,14 @@ require_once("tree_info.php");
 // This function handles the PayPal IPN call
 function aah_paypal_ipn() {
     $id = aah_get_any_unadopted_tree();
-    echo "Tree ID: $id<br>";
     $result = aah_adopt_tree_by_id($id);
-    echo "Result: $result";
     ?>
     <script type="text/javascript">
-        alert("Donation received");
+        <?php
+            echo "var tree_id = '$id'";
+            echo "var result = '$result'";
+        ?>
+        alert("Donation received. Tree ID: " . id . " and result: " . result)
     </script>
     <?php
 }
