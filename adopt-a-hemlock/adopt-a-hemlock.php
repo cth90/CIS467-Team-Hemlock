@@ -7,6 +7,7 @@
 * Author: Cameron Holly, Mike Day, Brandon Moody
 **/
 
-require 'settings.php';
-require 'tree_info.php';
-require 'pdf_generator.php';
+require_once 'settings.php';
+require_once 'tree_info.php';
+require_once 'pdf_generator.php';
+require_once 'paypal_handler.php';
