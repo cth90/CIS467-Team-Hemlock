@@ -18,4 +18,4 @@ function aah_paypal_ipn() {
     </script>
     <?php
 }
-add_action('aah_donation_ipn', 'aah_paypal_ipn');
+add_action('admin_post_aah_donation_ipn', 'aah_paypal_ipn');
