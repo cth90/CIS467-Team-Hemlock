@@ -19,3 +19,4 @@ function aah_paypal_ipn() {
     <?php
 }
 add_action('admin_post_aah_donation_ipn', 'aah_paypal_ipn');
+add_action('admin_post_nopriv_aah_donation_ipn', 'aah_paypal_ipn');
