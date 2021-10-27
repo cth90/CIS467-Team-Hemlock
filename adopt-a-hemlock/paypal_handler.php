@@ -10,5 +10,10 @@ function aah_paypal_ipn() {
     echo "Tree ID: $id<br>";
     $result = aah_adopt_tree_by_id($id);
     echo "Result: $result";
+    ?>
+    <script type="text/javascript">
+        alert("Donation received");
+    </script>
+    <?php
 }
 add_action('aah_donation_ipn', 'aah_paypal_ipn');
