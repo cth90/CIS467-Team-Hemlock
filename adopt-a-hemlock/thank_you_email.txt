@@ -1,0 +1,8 @@
+Dear %name%,
+
+Thank you for your donation of %dnt_amt%! Your contribution will help us on our mission to save these Hemlock trees and ensure our children and grandchildren can rest under their shade.
+
+In order to complete your symbolic adoption, please click the following link to be assigned a tree and receive your PDF certificate:
+%link%
+
+Thanks again from all of us at Adopt-A-Hemlock!

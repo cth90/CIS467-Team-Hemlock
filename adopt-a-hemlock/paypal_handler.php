@@ -18,6 +18,8 @@ function aah_get_paypal_url() {
     return 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr';
 }
 
+// Verify PayPal transaction
+// Reference: https://developer.paypal.com/docs/api-basics/notifications/ipn/ht-ipn/
 function aah_paypal_ipn_handshake() {
 
     // Read POST data
@@ -67,6 +69,13 @@ function aah_paypal_ipn_handshake() {
 }
 
 function aah_handle_valid_donation() {
+    $info['email'] = $_POST['payer_email'];
+    $info['name'] = $_POST['first_name'] . " " . $_POST['last_name'];
+    $info['dnt_amt'] = $_POST['mc_gross'];
+    $info['payment_id'] = $_POST['txn_id'];
+    $info['adoption_id'] = md5( $_POST['txn_id'] . $_POST['payer_email']);
+
+
     aah_adopt_tree_by_id(aah_get_any_unadopted_tree()['id']);
 }
 

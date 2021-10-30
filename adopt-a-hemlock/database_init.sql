@@ -28,9 +28,12 @@ CREATE TABLE `aah_transactions`
 (
     `id`          int AUTO_INCREMENT,
     `name`        varchar(255),
-    `payment_id`  int,
+    `email`       varchar(255),
+    `payment_id`  varchar(30),
+    `adoption_id` varchar(40),
     `amt_donated` DECIMAL(13, 2),
     `anonymous`   boolean,
+    `completed`   boolean DEFAULT FALSE,
 	`tree_id`     int,
     PRIMARY KEY (id),
 	UNIQUE (tree_id)
