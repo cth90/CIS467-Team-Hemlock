@@ -5,8 +5,18 @@ require_once("tree_info.php");
  */
 
 // This function handles the PayPal IPN call
-function aah_paypal_ipn() {
-    aah_paypal_ipn_handshake();
+function aah_paypal_ipn()
+{
+    if (aah_paypal_ipn_handshake() == true) {
+
+        if(!aah_handle_valid_donation()) {
+            // Handling of transaction failed
+            // todo handle error
+        }
+
+    } else {
+        aah_handle_invalid_donation();
+    }
 }
 add_action('admin_post_aah_donation_ipn', 'aah_paypal_ipn');
 add_action('admin_post_nopriv_aah_donation_ipn', 'aah_paypal_ipn');
@@ -59,12 +69,10 @@ function aah_paypal_ipn_handshake() {
     // inspect IPN validation result and act accordingly
     if (strcmp ($res, "VERIFIED") == 0) {
         // The IPN is verified
-        // todo valid IPN
-        aah_handle_valid_donation();
+        return true;
     } else if (strcmp ($res, "INVALID") == 0) {
         // IPN invalid
-        // todo invalid IPN
-        aah_handle_invalid_donation();
+        return false;
     }
 }
 
@@ -76,9 +84,27 @@ function aah_handle_valid_donation() {
     $info['adoption_id'] = md5( $_POST['txn_id'] . $_POST['payer_email']);
 
 
-    aah_adopt_tree_by_id(aah_get_any_unadopted_tree()['id']);
+    if (!aah_create_new_transaction($info)) {
+        // todo transaction creation failed
+    } else {
+        // transaction creation succeeded
+        aah_send_donation_email($info);
+    }
+}
+
+function aah_send_donation_email($info) {
+    // todo send initial donation thank you email
+    wp_mail($info['email'], 'Thank You for Donating', aah_get_email_text($info));
+}
+
+function aah_get_email_text($info) {
+    // todo generate email text
+
+    $info['link'] = get_site_url(null, 'adoption-information?id=' . $info['adoption_id']);
+    $email_body = 'Link: ' . $info['link'];
+    return $email_body;
 }
 
 function aah_handle_invalid_donation() {
-
+    // todo handle invalid donation
 }

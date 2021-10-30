@@ -188,3 +188,17 @@ function aah_insert_transaction($transaction_info)
     }
     return $result;
 }
+
+// Create a new transaction
+function aah_create_new_transaction($info) {
+    $transaction_info = array(
+        'email' => $info['email'],
+        'payment_id' => $info['payment_id'],
+        'adoption_id' => $info['adoption_id'],
+        'amt_donated' => $info['dnt_amt'],
+        'anonymous' => 'true',
+        'completed' => 'false'
+    );
+
+    return aah_insert_transaction($transaction_info);
+}

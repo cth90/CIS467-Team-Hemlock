@@ -36,7 +36,8 @@ CREATE TABLE `aah_transactions`
     `completed`   boolean DEFAULT FALSE,
 	`tree_id`     int,
     PRIMARY KEY (id),
-	UNIQUE (tree_id)
+	UNIQUE (tree_id),
+	UNIQUE (adoption_id)
 );
 
 ALTER TABLE `aah_transactions`
