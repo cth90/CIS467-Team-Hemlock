@@ -196,8 +196,8 @@ function aah_create_new_transaction($info) {
         'payment_id' => $info['payment_id'],
         'adoption_id' => $info['adoption_id'],
         'amt_donated' => $info['dnt_amt'],
-        'anonymous' => 'true',
-        'completed' => 'false'
+        'anonymous' => 0,
+        'completed' => 0
     );
 
     return aah_insert_transaction($transaction_info);
