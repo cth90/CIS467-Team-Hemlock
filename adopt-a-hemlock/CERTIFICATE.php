@@ -8,7 +8,7 @@ class CERTIFICATE extends TCPDF {
     //Page header
     public function Header() {
         // get the current page break margin
-       //$bMargin = $this->getBreakMargin();
+       $bMargin = $this->getBreakMargin();
         // get current auto-page-break mode
         $auto_page_break = $this->AutoPageBreak;
         // disable auto-page-break
@@ -16,7 +16,7 @@ class CERTIFICATE extends TCPDF {
         // set bacground image
         $this->Image(CERT_URL, 0, 0, 0, 0, '', '', '', true, 300, 'C', false, false, 0, false, false, true);
         // restore auto-page-break status
-        //$this->SetAutoPageBreak($auto_page_break, $bMargin);
+        $this->SetAutoPageBreak($auto_page_break, $bMargin);
         // set the starting point for the page content
         $this->setPageMark();
     }
