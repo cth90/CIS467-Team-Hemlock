@@ -53,8 +53,22 @@ function aah_get_pdf_by_transaction($transaction_id) {
     $info = aah_get_transaction_info($transaction_id);
 
     // todo write pdf
-    $pdf->SetY(448);
-    $pdf->write(0, 'Placeholder', null, false, 'C');
+
+    // Write name
+    $pdf->SetY(220);
+    $pdf->write(0, $info['name'], null, false, 'C');
+    // Write tree location name
+    $pdf->SetY(270);
+    $pdf->write(0, $info['location_name'], null, false, 'C');
+    // Write tree tag
+    $pdf->SetY(280);
+    $pdf->write(0, $info['tree_tag'], null, false, 'C');
+    // Write tree coords
+    $pdf->SetY(290);
+    $pdf->write(0, $info['latitude'] . ", " . $info['longitude'], null, false, 'C');
+    // Write date
+    $pdf->SetXY(110, 335);
+    $pdf->write(0, $info['date'], null, false, 'C');
 
 
     $pdfs_path = get_home_path() . "wp-content/pdfs/";
@@ -63,10 +77,6 @@ function aah_get_pdf_by_transaction($transaction_id) {
     if (!file_exists($pdfs_path)) {
         mkdir( $pdfs_path,0755,false );
     }
-    // Delete pdf if it already exists
-//    if(file_exists($pdfs_path . $file_name)) {
-//        unlink($pdfs_path . $file_name);
-//    }
 
     $pdf->Output($pdfs_path . $file_name, "F");
     $url = content_url() . "/pdfs/" . $file_name;
@@ -75,12 +85,12 @@ function aah_get_pdf_by_transaction($transaction_id) {
 //sql query for each element of the array
 function aah_get_transaction_info($transaction_id) {
     $info = array(
-        'name'=>'',
-        'date'=>'',
-        'tree_tag'=>'',
-        'location_name'=>'',
-        'longitude'=>'',
-        'latitude'=>''
+        'name'=>'Placeholder Name',
+        'date'=>date('m/d/Y'),
+        'tree_tag'=>'0000',
+        'location_name'=>'Wherever',
+        'longitude'=>'9999999.9999',
+        'latitude'=>'9999999.9999'
     );
 
     return $info;
