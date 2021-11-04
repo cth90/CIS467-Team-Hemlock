@@ -52,8 +52,6 @@ function aah_get_pdf_by_transaction($transaction_id) {
 
     $info = aah_get_transaction_info($transaction_id);
 
-    // todo write pdf
-
     // Write name
     $pdf->SetY(110);
     $pdf->write(5, $info['name'], null, false, 'C');
@@ -69,6 +67,8 @@ function aah_get_pdf_by_transaction($transaction_id) {
     // Write date
     $pdf->SetXY(70, 170);
     $pdf->write(5, $info['date']);
+
+    // todo write notes
 
 
     $pdfs_path = get_home_path() . "wp-content/pdfs/";
@@ -91,7 +91,8 @@ function aah_get_transaction_info($transaction_id): array
         'tree_tag'=>'0000',
         'location_name'=>'Wherever',
         'longitude'=>'9999999.9999',
-        'latitude'=>'9999999.9999'
+        'latitude'=>'9999999.9999',
+        'notes'=>''
     );
 
     return $info;
