@@ -56,19 +56,19 @@ function aah_get_pdf_by_transaction($transaction_id) {
 
     // Write name
     $pdf->SetY(220);
-    $pdf->write(0, $info['name'], null, false, 'C');
+    $pdf->write(5, $info['name'], null, false, 'C');
     // Write tree location name
     $pdf->SetY(270);
-    $pdf->write(0, $info['location_name'], null, false, 'C');
+    $pdf->write(5, $info['location_name'], null, false, 'C');
     // Write tree tag
     $pdf->SetY(280);
-    $pdf->write(0, $info['tree_tag'], null, false, 'C');
+    $pdf->write(5, $info['tree_tag'], null, false, 'C');
     // Write tree coords
     $pdf->SetY(290);
-    $pdf->write(0, $info['latitude'] . ", " . $info['longitude'], null, false, 'C');
+    $pdf->write(5, $info['latitude'] . ", " . $info['longitude'], null, false, 'C');
     // Write date
     $pdf->SetXY(110, 335);
-    $pdf->write(0, $info['date'], null, false, 'C');
+    $pdf->write(5, $info['date'], null, false, 'C');
 
 
     $pdfs_path = get_home_path() . "wp-content/pdfs/";
