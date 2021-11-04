@@ -68,7 +68,7 @@ function aah_get_pdf_by_transaction($transaction_id) {
     $pdf->write(5, $info['latitude'] . ", " . $info['longitude'], null, false, 'C');
     // Write date
     $pdf->SetXY(110, 335);
-    $pdf->write(5, $info['date'], null, false, 'C');
+    $pdf->write(5, $info['date']);
 
 
     $pdfs_path = get_home_path() . "wp-content/pdfs/";
