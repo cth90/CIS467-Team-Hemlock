@@ -53,6 +53,8 @@ function aah_get_pdf_by_transaction($transaction_id) {
     $info = aah_get_transaction_info($transaction_id);
 
     // todo write pdf
+    $pdf->SetY(448);
+    $pdf->write(0, 'Placeholder', null, false, 'C');
 
 
     $pdfs_path = get_home_path() . "wp-content/pdfs/";
@@ -73,12 +75,12 @@ function aah_get_pdf_by_transaction($transaction_id) {
 //sql query for each element of the array
 function aah_get_transaction_info($transaction_id) {
     $info = array(
-        0=>'', //name
-        1=>'', //date
-        2=>'', //tree_tag
-        3=>'', //location_name
-        5=>'', //longitude
-        6=>'', //latitude
+        'name'=>'',
+        'date'=>'',
+        'tree_tag'=>'',
+        'location_name'=>'',
+        'longitude'=>'',
+        'latitude'=>''
     );
 
     return $info;
