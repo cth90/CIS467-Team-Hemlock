@@ -57,9 +57,20 @@ function aah_get_pdf_by_transaction($transaction_id) {
     // todo write pdf
     //$pdf->Image(CERT_URL);
 
-    $file_path = get_home_path() . "wp-content/pdfs/" . $transaction_id . ".pdf";
-    $pdf->Output($file_path, "F");
-    $url = content_url() . "/pdfs/" . $transaction_id . ".pdf";
+
+    $pdfs_path = get_home_path() . "wp-content/pdfs/";
+    $file_name =  $transaction_id . ".pdf";
+    // Create pdfs directory if it doesn't exist
+    if (!file_exists($pdfs_path)) {
+        mkdir( $pdfs_path,0755,false );
+    }
+    // Delete pdf if it already exists
+    if(file_exists($pdfs_path . $file_name)) {
+        unlink($pdfs_path . $file_name);
+    }
+
+    $pdf->Output($pdfs_path . $file_name, "F");
+    $url = content_url() . "/pdfs/" . $file_name;
     return $url;
 }
 //sql query for each element of the array
