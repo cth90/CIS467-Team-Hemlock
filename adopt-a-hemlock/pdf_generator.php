@@ -1,6 +1,7 @@
 <?php
 //require_once("TCPDF/tcpdf_autoconfig.php");
 require_once("TCPDF/tcpdf.php");
+define('CERT_URL', get_site_url(null, 'certificate.png'));
 
 function aah_render_pdf_generator()
 {
@@ -45,15 +46,13 @@ add_action('wp_ajax_nopriv_aah_get_pdf_by_transaction', 'aah_get_pdf_by_transact
 
 // Takes a transaction id and returns a pdf as a string url.
 function aah_get_pdf_by_transaction($transaction_id) {
-    $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    $pdf = new TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     $pdf->AddPage();
-
 
     $info = aah_get_transaction_info($transaction_id);
 
     // todo write pdf
-    $pdf->writeHTML("<h1>Test: $info[8]</h1>");
-    $pdf->Image('https://hemlock.omgbbq.org/dev/wp-content/uploads/2021/10/CaligraphyLogo.png');
+    $pdf->Image(CERT_URL);
 
     $file_path = get_home_path() . "wp-content/pdfs/" . $transaction_id . ".pdf";
     $pdf->Output($file_path, "F");
@@ -67,11 +66,8 @@ function aah_get_transaction_info($transaction_id) {
         1=>'', //date
         2=>'', //tree_tag
         3=>'', //location_name
-        4=>'', //location_address
         5=>'', //longitude
         6=>'', //latitude
-        7=>'', //donation_amt
-        8=>$transaction_id //transaction_id
     );
 
     return $info;
