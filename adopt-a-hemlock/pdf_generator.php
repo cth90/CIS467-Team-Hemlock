@@ -1,6 +1,6 @@
 <?php
 //require_once("TCPDF/tcpdf_autoconfig.php");
-require_once("TCPDF/tcpdf.php");
+require_once('CERTIFICATE.php');
 define('CERT_URL', plugin_dir_url(__FILE__) . 'certificate.png');
 
 function aah_render_pdf_generator()
@@ -47,13 +47,15 @@ add_action('wp_ajax_nopriv_aah_get_pdf_by_transaction', 'aah_get_pdf_by_transact
 
 // Takes a transaction id and returns a pdf as a string url.
 function aah_get_pdf_by_transaction($transaction_id) {
-    $pdf = new TCPDF('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    $pdf = new CERTIFICATE('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+    //$pdf->setPrintHeader(false);
+    //$pdf->setPrintFooter(false);
     $pdf->AddPage();
 
     $info = aah_get_transaction_info($transaction_id);
 
     // todo write pdf
-    $pdf->Image(CERT_URL);
+    //$pdf->Image(CERT_URL);
 
     $file_path = get_home_path() . "wp-content/pdfs/" . $transaction_id . ".pdf";
     $pdf->Output($file_path, "F");
