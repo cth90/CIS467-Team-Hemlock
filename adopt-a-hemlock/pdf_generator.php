@@ -55,9 +55,9 @@ function aah_get_pdf_by_transaction($transaction_id) {
     // todo write pdf
 
     // Write name
-    $pdf->SetY(220);
-    //$pdf->write(5, $info['name'], null, false, 'C');
-    $pdf->writeHTML($info['name'], true, false, false, false, 'C');
+    $pdf->SetY(10);
+    $pdf->write(5, $info['name'], null, false, 'C');
+    //$pdf->writeHTML($info['name'], true, false, false, false, 'C');
     // Write tree location name
     $pdf->SetY(270);
     $pdf->write(5, $info['location_name'], null, false, 'C');
