@@ -57,16 +57,15 @@ function aah_get_pdf_by_transaction($transaction_id) {
     // Write name
     $pdf->SetY(110);
     $pdf->write(5, $info['name'], null, false, 'C');
-    //$pdf->writeHTML($info['name'], true, false, false, false, 'C');
     // Write tree location name
-    $pdf->SetY(135);
-    $pdf->write(5, $info['location_name'], null, false, 'C');
+    $pdf->SetXY(150,136);
+    $pdf->write(5, $info['location_name']);
     // Write tree tag
-    $pdf->SetY(140);
-    $pdf->write(5, $info['tree_tag'], null, false, 'C');
+    $pdf->SetXY(150,141);
+    $pdf->write(5, $info['tree_tag']);
     // Write tree coords
-    $pdf->SetY(145);
-    $pdf->write(5, $info['latitude'] . ", " . $info['longitude'], null, false, 'C');
+    $pdf->SetXY(150,146);
+    $pdf->write(5, $info['latitude'] . ", " . $info['longitude']);
     // Write date
     $pdf->SetXY(70, 170);
     $pdf->write(5, $info['date']);
