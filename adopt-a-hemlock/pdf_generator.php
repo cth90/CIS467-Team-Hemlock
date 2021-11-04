@@ -64,9 +64,9 @@ function aah_get_pdf_by_transaction($transaction_id) {
         mkdir( $pdfs_path,0755,false );
     }
     // Delete pdf if it already exists
-    if(file_exists($pdfs_path . $file_name)) {
-        unlink($pdfs_path . $file_name);
-    }
+//    if(file_exists($pdfs_path . $file_name)) {
+//        unlink($pdfs_path . $file_name);
+//    }
 
     $pdf->Output($pdfs_path . $file_name, "F");
     $url = content_url() . "/pdfs/" . $file_name;
