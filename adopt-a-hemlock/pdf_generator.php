@@ -1,7 +1,7 @@
 <?php
 //require_once("TCPDF/tcpdf_autoconfig.php");
 require_once("TCPDF/tcpdf.php");
-define('CERT_URL', get_site_url(null, 'certificate.png'));
+define('CERT_URL', plugin_dir_url(__FILE__) . 'certificate.png');
 
 function aah_render_pdf_generator()
 {
