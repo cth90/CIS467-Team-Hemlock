@@ -46,10 +46,11 @@ function aah_render_tree_lookup()
         <br>
     </div>
     <script type="text/javascript">
+        var ajaxurl = "<?php echo admin_url('admin-ajax.php'); ?>";
         jQuery(document).ready(function ($) {
             $('.tree-lookup-button').click(function () {
                 var form_data = jQuery('.tree-lookup-form').serializeArray();
-                $.post(<?php echo "'" . admin_url('admin-ajax.php') . "'"; ?>, form_data, function (response) {
+                $.post(ajaxurl, form_data, function (response) {
                     var div = $(".tree-info");
                     $(div).find(".tree-id").html(response['id']);
                     $(div).find(".tree-tag").html(response['tag']);
