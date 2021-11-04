@@ -55,20 +55,20 @@ function aah_get_pdf_by_transaction($transaction_id) {
     // todo write pdf
 
     // Write name
-    $pdf->SetY(90);
+    $pdf->SetY(110);
     $pdf->write(5, $info['name'], null, false, 'C');
     //$pdf->writeHTML($info['name'], true, false, false, false, 'C');
     // Write tree location name
-    $pdf->SetY(110);
+    $pdf->SetY(135);
     $pdf->write(5, $info['location_name'], null, false, 'C');
     // Write tree tag
-    $pdf->SetY(120);
+    $pdf->SetY(140);
     $pdf->write(5, $info['tree_tag'], null, false, 'C');
     // Write tree coords
-    $pdf->SetY(130);
+    $pdf->SetY(145);
     $pdf->write(5, $info['latitude'] . ", " . $info['longitude'], null, false, 'C');
     // Write date
-    $pdf->SetXY(80, 150);
+    $pdf->SetXY(70, 170);
     $pdf->write(5, $info['date']);
 
 
