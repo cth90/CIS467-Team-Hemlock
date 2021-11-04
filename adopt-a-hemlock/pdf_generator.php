@@ -83,7 +83,8 @@ function aah_get_pdf_by_transaction($transaction_id) {
     return $url;
 }
 //sql query for each element of the array
-function aah_get_transaction_info($transaction_id) {
+function aah_get_transaction_info($transaction_id): array
+{
     $info = array(
         'name'=>'Placeholder Name',
         'date'=>date('m/d/Y'),
