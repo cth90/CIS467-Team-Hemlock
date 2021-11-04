@@ -23,7 +23,7 @@ function aah_render_pdf_generator()
         jQuery(document).ready(function ($) {
             $('.pdf-get-button').click(function () {
                 var form_data = jQuery('.pdf-generator-form').serializeArray();
-                $.post(ajaxurl, form_data, function (response) {
+                $.post(<?php echo admin_url('admin-ajax.php'); ?>, form_data, function (response) {
                     $('.pdf-url').html('<a href="' + response['url'] + '">PDF</a>');
                 });
             });

@@ -49,7 +49,7 @@ function aah_render_tree_lookup()
         jQuery(document).ready(function ($) {
             $('.tree-lookup-button').click(function () {
                 var form_data = jQuery('.tree-lookup-form').serializeArray();
-                $.post(ajaxurl, form_data, function (response) {
+                $.post(<?php echo admin_url('admin-ajax.php'); ?>, form_data, function (response) {
                     var div = $(".tree-info");
                     $(div).find(".tree-id").html(response['id']);
                     $(div).find(".tree-tag").html(response['tag']);
