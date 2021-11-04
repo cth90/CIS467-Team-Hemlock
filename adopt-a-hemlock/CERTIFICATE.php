@@ -14,7 +14,7 @@ class CERTIFICATE extends TCPDF {
         // disable auto-page-break
         $this->SetAutoPageBreak(false, 0);
         // set bacground image
-        $this->Image(CERT_URL, 0, 0, 210, 297, '', '', '', false, 300, '', false, false, 0);
+        $this->Image(CERT_URL, 0, 0, 0, 0, '', '', '', false, 300, '', false, false, 0);
         // restore auto-page-break status
         $this->SetAutoPageBreak($auto_page_break, $bMargin);
         // set the starting point for the page content
