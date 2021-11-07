@@ -85,6 +85,22 @@ function aah_get_pdf_by_transaction($transaction_id) {
 //sql query for each element of the array
 function aah_get_transaction_info($transaction_id): array
 {
+    global $wpdb;
+
+    $sql = 'SELECT
+	tree.`name` AS name,
+	tree.`completed` AS date,
+	t.`tag` as tree_tag,
+	l.`name` as location_name,
+	l.`address` as location_address,
+	t.`longitude` as longtitude,
+	t.`latitude` as latitude,
+	tree.`amt_donated` as donation_amt
+FROM
+    `aah_transactions` as tree
+inner join `aah_trees` as t on t.tag = tree.tree_id
+inner join `aah_locations` as l on l.id = t.location_id';
+
     $info = array(
         'name'=>'Placeholder Name',
         'date'=>date('m/d/Y'),
