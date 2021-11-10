@@ -86,6 +86,7 @@ function aah_handle_valid_donation() {
 
     if (!aah_create_new_transaction($info)) {
         // todo transaction creation failed
+        return false;
     } else {
         // transaction creation succeeded
         aah_send_donation_email($info);

@@ -3,7 +3,7 @@
 require_once("TCPDF/tcpdf.php");
 define('CERT_URL', plugin_dir_url(__FILE__) . 'certificate.png');
 
-// Extend the TCPDF class to create custom Header and Footer
+// Extend the TCPDF class to create custom Header
 class CERTIFICATE extends TCPDF {
     //Page header
     public function Header() {

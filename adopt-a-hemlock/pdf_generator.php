@@ -67,8 +67,9 @@ function aah_get_pdf_by_transaction($transaction_id) {
     // Write date
     $pdf->SetXY(70, 170);
     $pdf->write(5, $info['date']);
-
-    // todo write notes
+    // Write notes
+    $pdf->SetXY(135,150);
+    $pdf->write(5, $info['notes']);
 
 
     $pdfs_path = get_home_path() . "wp-content/pdfs/";
