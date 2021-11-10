@@ -35,6 +35,7 @@ CREATE TABLE `aah_transactions`
     `anonymous`   boolean,
     `completed`   boolean DEFAULT FALSE,
 	`tree_id`     int,
+	`pdf_link`    varchar(255),
     PRIMARY KEY (id),
 	UNIQUE (tree_id),
 	UNIQUE (adoption_id)

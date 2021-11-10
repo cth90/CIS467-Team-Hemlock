@@ -114,8 +114,3 @@ inner join `aah_locations` as l on l.id = t.location_id';
 
     return $info;
 }
-
-function aah_get_pdf_link_by_aid($a_id) {
-    // todo generate url
-    return false;
-}
