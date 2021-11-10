@@ -137,7 +137,7 @@ function aah_get_location_name($id) {
     if ($id < 0) { return 0; }
     global $wpdb;
     $sql = 'SELECT name FROM `aah_locations` WHERE id = %d';
-    if (!($result = $wpdb->get_row($wpdb->prepare($sql, $id), ARRAY_N))) {
+    if (!($result = $wpdb->get_row($wpdb->prepare($sql, $id), ARRAY_N))) { //Used for testing
         trigger_error("No matching location found.");
         return 0;
     }

@@ -96,21 +96,19 @@ function aah_get_transaction_info($transaction_id): array
 	l.`address` as location_address,
 	t.`longitude` as longtitude,
 	t.`latitude` as latitude,
-	tree.`amt_donated` as donation_amt
 FROM
     `aah_transactions` as tree
+WHERE 
+    tree_id = %d
 inner join `aah_trees` as t on t.tag = tree.tree_id
 inner join `aah_locations` as l on l.id = t.location_id';
 
-    $info = array(
-        'name'=>'Placeholder Name',
-        'date'=>date('m/d/Y'),
-        'tree_tag'=>'0000',
-        'location_name'=>'Wherever',
-        'longitude'=>'9999999.9999',
-        'latitude'=>'9999999.9999',
-        'notes'=>''
-    );
+    if (!($result = $wpdb->get_row($wpdb->prepare($sql, $transaction_id), ARRAY_A))) {
+        trigger_error("No matching location found.");
+        return 0;
+    }
+    $result['date']=date('m/d/Y');
 
-    return $info;
+
+    return $result;
 }
