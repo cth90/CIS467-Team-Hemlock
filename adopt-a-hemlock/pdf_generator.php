@@ -100,7 +100,7 @@ function aah_get_transaction_info($transaction_id)
     tree.id as id
 FROM
     `aah_transactions` as tree
-inner join `aah_trees` as t on t.tag = tree.tree_id
+inner join `aah_trees` as t on t.id = tree.tree_id
 inner join `aah_locations` as l on l.id = t.location_id
 WHERE 
     tree.id = %d';
