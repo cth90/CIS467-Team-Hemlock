@@ -76,10 +76,10 @@ function aah_get_transaction_info_by_aid($aid)
     t.anonymous as anonymous
 FROM
     `aah_transactions` as t
-inner join `aah_trees` as tree on t.id = tree.tree_id
-inner join `aah_locations` as loc on loc.id = t.location_id
+inner join `aah_trees` as tree on tree.id = t.tree_id
+inner join `aah_locations` as loc on loc.id = tree.location_id
 WHERE 
-    tree.adoption_id = %s';
+    t.adoption_id = %s';
 
     if (!($result = $wpdb->get_row($wpdb->prepare($sql, $aid), ARRAY_A))) {
         trigger_error("No matching transaction found.");
