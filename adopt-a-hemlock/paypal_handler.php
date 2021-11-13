@@ -101,7 +101,7 @@ function aah_send_donation_email($info) {
 function aah_get_email_text($info) {
     // todo generate email text
 
-    $info['link'] = get_site_url(null, 'adoption-information?id=' . $info['adoption_id']);
+    $info['link'] = get_site_url(null, 'adoption-information?a_id=' . $info['adoption_id']);
     $email_body = 'Link: ' . $info['link'];
     return $email_body;
 }
