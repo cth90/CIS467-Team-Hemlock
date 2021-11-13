@@ -12,8 +12,9 @@ function aah_render_adoption_page()
 
         // Handle location selection form if it was submitted
         if (!empty($_POST['tree-locations'])) {
-            aah_adopt_tree($transaction['transaction_id'], $_POST['tree-locations'], boolval($_POST['anonymous']));
-            echo "Tree adoption failed: " . $_POST['tree-selection-form'];
+            if(!(aah_adopt_tree($transaction['transaction_id'], $_POST['tree-locations'], boolval($_POST['anonymous'])))) {
+                echo "Tree adoption failed.";
+            }
             // update transaction info
             $transaction = aah_get_transaction_info_by_aid($_GET['a_id']);
         }
