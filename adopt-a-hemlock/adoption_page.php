@@ -50,7 +50,7 @@ function aah_render_adoption_page()
             <?php
         }
     } else {
-        echo "Transaction not found.";
+        echo implode(", ", $transaction);
     }
 
     return ob_get_clean();
