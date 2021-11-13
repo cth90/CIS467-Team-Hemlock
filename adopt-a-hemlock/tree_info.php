@@ -47,7 +47,7 @@ function aah_get_any_unadopted_tree_by_area($area)
     global $wpdb;
     $sql = 'SELECT a.* FROM `aah_trees` a 
 WHERE a.id NOT IN (SELECT b.tree_id FROM `aah_transactions` b) AND a.location_id IN (
-SELECT c.id FROM `aah_locations` c WHERE %s IN (id, name, parcel, address)) LIMIT 1';
+SELECT c.id FROM `aah_locations` c WHERE c.id = %s) LIMIT 1';
     if (!($result = $wpdb->get_row($wpdb->prepare($sql, $area), ARRAY_A))) {
         trigger_error("No tree found.");
         return false;
@@ -163,19 +163,6 @@ function aah_get_tree_count_by_location($attr) {
     return $count;
 }
 add_shortcode('tree_count', 'aah_get_tree_count_by_location');
-
-// Create a dummy transaction to adopt a tree by its id (not tag) for development purposes
-function aah_adopt_tree_by_id($tree_id)
-{
-    $transaction_info = array(
-        'name' => 'Nyatasha Nyanners',
-        'payment_id' => 9999,
-        'amt_donated' => '99999999.99',
-        'tree_id' => $tree_id,
-        'anonymous' => 'false'
-    );
-    return aah_insert_transaction($transaction_info);
-}
 
 // Insert transaction info into db
 function aah_insert_transaction($transaction_info)

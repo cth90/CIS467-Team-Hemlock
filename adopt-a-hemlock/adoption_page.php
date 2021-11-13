@@ -2,16 +2,23 @@
 /**
  * This file contains the code to display and handle the adoption page
  */
+require_once 'tree_info.php';
+require_once 'pdf_generator.php';
 
 function aah_render_adoption_page()
 {
-    // Handle location selection form if it was submitted
-    if (!empty($_POST['tree-selection-form'])) {
-        // todo handle form
-    }
-
     ob_start();
     if ($transaction = aah_get_transaction_info_by_aid($_GET['a_id'])) {
+
+        // Handle location selection form if it was submitted
+        if (!empty($_POST['tree-selection-form'])) {
+            aah_adopt_tree($transaction['transaction_id'], $_POST['tree-selection-form']['tree-locations'], $_POST['tree-selection-form']['anonymous']);
+
+            // update transaction info
+            $transaction = aah_get_transaction_info_by_aid($_GET['a_id']);
+        }
+
+        // Show details of a completed transaction
         if ($transaction['completed']) {
             ?>
             <div class="adoption-info">
@@ -29,6 +36,7 @@ function aah_render_adoption_page()
             </div>
             <?php
         } else {
+            // complete transaction
             $locations = aah_get_locations();
             ?>
             <div class="tree-selection">
@@ -43,8 +51,9 @@ function aah_render_adoption_page()
                             }
                             ?>
                     </select>
-                    <input type="hidden" value="<?php echo $_POST['id'] ?>">
-                    <button type="submit" class="tree-selection-submit">Adopt</button>
+                    <br><label>Hide Name from Donor List: <input type="checkbox" name="anonymous" value="1"></label>
+                    <input type="hidden" name="a_id" value="<?php echo $_POST['a_id'] ?>">
+                    <br><button type="submit" class="tree-selection-submit">Adopt</button>
                 </form>
             </div>
             <?php
@@ -69,11 +78,12 @@ function aah_get_transaction_info_by_aid($aid)
 	tree.`latitude` as latitude,
     tree.`notes` as notes,
     t.id as transaction_id,
-    t.adoption_id as id,
+    t.adoption_id as a_id,
     t.pdf_link as link,
     t.completed as completed,
     t.email as email,
-    t.anonymous as anonymous
+    t.anonymous as anonymous,
+    tree.id as tree_id
 FROM
     `aah_transactions` as t
 left join `aah_trees` as tree on tree.id = t.tree_id
@@ -88,4 +98,40 @@ WHERE
 
     return $result;
 
+}
+
+// Adopt the tree
+function aah_adopt_tree($transaction_id, $location, $anon) {
+    global $wpdb;
+
+    if ($location == "any") {
+        $tree = aah_get_any_unadopted_tree();
+    } else {
+        $tree = aah_get_any_unadopted_tree_by_area($location);
+    }
+
+    $updated_t = array(
+        'anonymous'=>$anon,
+        'completed'=>1,
+        'tree_id'=>$tree['id']
+    );
+
+    // update transaction
+    if(!($wpdb->update("aah_transactions", $updated_t, array("id"=>$transaction_id)))) {
+        trigger_error("Unable to adopt tree.");
+        return false;
+    }
+
+    // generate pdf
+    if (!($pdf_link = aah_get_pdf_by_transaction($transaction_id))) {
+        trigger_error("Unable to generate pdf");
+        // todo handle pdf error
+    } else {
+        // update transaction with pdf link
+        if (!($wpdb->update("aah_transactions", array("pdf_link" => $pdf_link), array("id" => $transaction_id)))) {
+            trigger_error("Unable to update pdf link.");
+        }
+    }
+
+    return true;
 }
