@@ -11,7 +11,7 @@ function aah_render_adoption_page()
     }
 
     ob_start();
-    if ($transaction = aah_get_transaction_info_by_aid($_POST['id'])) {
+    if ($transaction = aah_get_transaction_info_by_aid($_GET['a_id'])) {
         if (!empty($transaction['tree_tag'])) {
             ?>
             <div class="adoption-info">
@@ -50,7 +50,7 @@ function aah_render_adoption_page()
             <?php
         }
     } else {
-        echo "Transaction id " . $_POST['id'] . " not found.";
+        echo "Transaction id " . $_GET['a_id'] . " not found.";
     }
 
     return ob_get_clean();
