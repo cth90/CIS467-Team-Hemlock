@@ -96,13 +96,14 @@ function aah_get_transaction_info($transaction_id)
 	l.`name` as location_name,
 	t.`longitude` as longtitude,
 	t.`latitude` as latitude,
-    t.`notes` as notes
+    t.`notes` as notes,
+    tree.id as id
 FROM
     `aah_transactions` as tree
 inner join `aah_trees` as t on t.tag = tree.tree_id
 inner join `aah_locations` as l on l.id = t.location_id
 WHERE 
-    id = %d';
+    tree.id = %d';
 
     if (!($result = $wpdb->get_row($wpdb->prepare($sql, $transaction_id), ARRAY_A))) {
         trigger_error("No matching transaction found.");
