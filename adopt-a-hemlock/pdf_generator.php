@@ -102,7 +102,7 @@ FROM
 inner join `aah_trees` as t on t.tag = tree.tree_id
 inner join `aah_locations` as l on l.id = t.location_id
 WHERE 
-    tree_id = %d';
+    id = %d';
 
     if (!($result = $wpdb->get_row($wpdb->prepare($sql, $transaction_id), ARRAY_A))) {
         trigger_error("No matching transaction found.");
