@@ -9,7 +9,7 @@ require 'tree_info_view.php';
 function aah_get_any_unadopted_tree()
 {
     global $wpdb;
-    $sql = 'SELECT a.* FROM `aah_trees` a WHERE a.id NOT IN (SELECT b.tree_id FROM `aah_transactions` b) LIMIT 1';
+    $sql = 'SELECT a.* FROM `aah_trees` a WHERE a.id NOT IN (SELECT b.tree_id FROM `aah_transactions` b WHERE b.tree_id = a.id) LIMIT 1';
     if (!($result = $wpdb->get_row($sql, ARRAY_A))) {
         trigger_error("No tree found.");
         return false;
@@ -41,13 +41,13 @@ function aah_get_tree_by_tag($tag)
     return $result;
 }
 
-// Get one unadopted tree by area, using any of area id, name, parcel, or address
+// Get one unadopted tree by area, using any of area id
 function aah_get_any_unadopted_tree_by_area($area)
 {
     global $wpdb;
     $sql = 'SELECT a.* FROM `aah_trees` a 
-WHERE a.id NOT IN (SELECT b.tree_id FROM `aah_transactions` b) AND a.location_id IN (
-SELECT c.id FROM `aah_locations` c WHERE c.id = %s) LIMIT 1';
+WHERE a.id NOT IN (SELECT b.tree_id FROM `aah_transactions` b WHERE b.tree_id = a.id) AND a.location_id IN (
+SELECT c.id FROM `aah_locations` c WHERE c.id = %d) LIMIT 1';
     if (!($result = $wpdb->get_row($wpdb->prepare($sql, $area), ARRAY_A))) {
         trigger_error("No tree found.");
         return false;
