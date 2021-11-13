@@ -50,7 +50,7 @@ function aah_render_adoption_page()
             <?php
         }
     } else {
-        echo implode(", ", $transaction);
+        echo "Transaction " . $_POST['id'] . " not found.";
     }
 
     return ob_get_clean();
