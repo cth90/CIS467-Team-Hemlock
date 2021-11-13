@@ -12,7 +12,7 @@ function aah_render_adoption_page()
 
     ob_start();
     if ($transaction = aah_get_transaction_info_by_aid($_GET['a_id'])) {
-        if (!empty($transaction['tree_tag'])) {
+        if ($transaction['completed']) {
             ?>
             <div class="adoption-info">
                 <label>Tree Tag: <input name="tree_tag" value="<?php echo $transaction['tree_tag'] ?>" type="text"
@@ -76,8 +76,8 @@ function aah_get_transaction_info_by_aid($aid)
     t.anonymous as anonymous
 FROM
     `aah_transactions` as t
-inner join `aah_trees` as tree on tree.id = t.tree_id
-inner join `aah_locations` as loc on loc.id = tree.location_id
+left join `aah_trees` as tree on tree.id = t.tree_id
+left join `aah_locations` as loc on loc.id = tree.location_id
 WHERE 
     t.adoption_id = %s';
 
