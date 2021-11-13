@@ -84,28 +84,27 @@ function aah_get_pdf_by_transaction($transaction_id) {
     return $url;
 }
 //sql query for each element of the array
-function aah_get_transaction_info($transaction_id): array
+function aah_get_transaction_info($transaction_id)
 {
     global $wpdb;
 
     $sql = 'SELECT
 	tree.`name` AS name,
-	tree.`completed` AS date,
 	t.`tag` as tree_tag,
 	l.`name` as location_name,
-	l.`address` as location_address,
 	t.`longitude` as longtitude,
 	t.`latitude` as latitude,
+    t.`notes` as notes
 FROM
     `aah_transactions` as tree
-WHERE 
-    tree_id = %d
 inner join `aah_trees` as t on t.tag = tree.tree_id
-inner join `aah_locations` as l on l.id = t.location_id';
+inner join `aah_locations` as l on l.id = t.location_id
+WHERE 
+    tree_id = %d';
 
     if (!($result = $wpdb->get_row($wpdb->prepare($sql, $transaction_id), ARRAY_A))) {
-        trigger_error("No matching location found.");
-        return 0;
+        trigger_error("No matching transaction found.");
+        return false;
     }
     $result['date']=date('m/d/Y');
 
