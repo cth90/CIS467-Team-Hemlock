@@ -50,38 +50,40 @@ function aah_get_pdf_by_transaction($transaction_id) {
     $pdf = new CERTIFICATE('L', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
     $pdf->AddPage();
 
-    $info = aah_get_transaction_info($transaction_id);
+    if ($info = aah_get_transaction_info($transaction_id)) {
 
-    // Write name
-    $pdf->SetY(110);
-    $pdf->write(5, $info['name'], null, false, 'C');
-    // Write tree location name
-    $pdf->SetXY(135,136);
-    $pdf->write(5, $info['location_name']);
-    // Write tree tag
-    $pdf->SetXY(135,141);
-    $pdf->write(5, $info['tree_tag']);
-    // Write tree coords
-    $pdf->SetXY(135,145);
-    $pdf->write(5, $info['latitude'] . ", " . $info['longitude']);
-    // Write date
-    $pdf->SetXY(70, 170);
-    $pdf->write(5, $info['date']);
-    // Write notes
-    $pdf->SetXY(135,150);
-    $pdf->write(5, $info['notes']);
+        // Write name
+        $pdf->SetY(110);
+        $pdf->write(5, $info['name'], null, false, 'C');
+        // Write tree location name
+        $pdf->SetXY(135, 136);
+        $pdf->write(5, $info['location_name']);
+        // Write tree tag
+        $pdf->SetXY(135, 141);
+        $pdf->write(5, $info['tree_tag']);
+        // Write tree coords
+        $pdf->SetXY(135, 145);
+        $pdf->write(5, $info['latitude'] . ", " . $info['longitude']);
+        // Write date
+        $pdf->SetXY(70, 170);
+        $pdf->write(5, $info['date']);
+        // Write notes
+        $pdf->SetXY(135, 150);
+        $pdf->write(5, $info['notes']);
 
 
-    $pdfs_path = get_home_path() . "wp-content/pdfs/";
-    $file_name =  $transaction_id . ".pdf";
-    // Create pdfs directory if it doesn't exist
-    if (!file_exists($pdfs_path)) {
-        mkdir( $pdfs_path,0755,false );
+        $pdfs_path = get_home_path() . "wp-content/pdfs/";
+        $file_name = $transaction_id . ".pdf";
+        // Create pdfs directory if it doesn't exist
+        if (!file_exists($pdfs_path)) {
+            mkdir($pdfs_path, 0755, false);
+        }
+
+        $pdf->Output($pdfs_path . $file_name, "F");
+        $url = content_url() . "/pdfs/" . $file_name;
+        return $url;
     }
-
-    $pdf->Output($pdfs_path . $file_name, "F");
-    $url = content_url() . "/pdfs/" . $file_name;
-    return $url;
+    return $info;
 }
 //sql query for each element of the array
 function aah_get_transaction_info($transaction_id)
