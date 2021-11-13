@@ -94,7 +94,7 @@ function aah_get_transaction_info($transaction_id)
 	tree.`name` AS name,
 	t.`tag` as tree_tag,
 	l.`name` as location_name,
-	t.`longitude` as longtitude,
+	t.`longitude` as longitude,
 	t.`latitude` as latitude,
     t.`notes` as notes,
     tree.id as id
