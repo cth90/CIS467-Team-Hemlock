@@ -1,12 +1,7 @@
 <?php
 
-function aah_render_tree_info($tree_info)
-{
-    // todo render tree info
-    return implode(", ", $tree_info);
-}
-
-function aah_render_tree_lookup()
+// todo transaction lookup
+function aah_render_transaction_lookup()
 {
     ob_start();
     ?>
@@ -70,4 +65,4 @@ function aah_render_tree_lookup()
     <?php
     return ob_get_clean();
 }
-add_shortcode('tree_search', 'aah_render_tree_lookup');
+add_shortcode('tree_search', 'aah_render_transaction_lookup');

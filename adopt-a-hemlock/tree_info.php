@@ -3,7 +3,7 @@
  * This file contains the functions for retrieving and updating info about trees from the database
  */
 
-require 'tree_info_view.php';
+require 'transaction_info.php';
 
 // Get one unadopted tree
 function aah_get_any_unadopted_tree()
