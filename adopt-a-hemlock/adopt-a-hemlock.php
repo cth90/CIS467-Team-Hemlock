@@ -12,3 +12,4 @@ require_once 'tree_info.php';
 require_once 'pdf_generator.php';
 require_once 'paypal_handler.php';
 require_once 'adoption_page.php';
+require_once 'donor_list.php';
