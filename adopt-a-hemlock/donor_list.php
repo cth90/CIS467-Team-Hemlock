@@ -19,7 +19,7 @@ function aah_render_donor_list($attr)
         $donors = aah_get_donors_by_location($attr['location']);
 
         foreach($donors as $donor) {
-            $name = $donor['name']
+            $name = $donor['name'];
             echo "<li>$name</li>\n";
         }
     }
