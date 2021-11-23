@@ -20,7 +20,7 @@ function aah_render_donor_list($attr)
 
         foreach($donors as $donor) {
             $name = $donor['name'];
-            echo "<li>$name</li>\n";
+            echo "<li>$name</li>";
         }
     }
     echo '</ul>';
