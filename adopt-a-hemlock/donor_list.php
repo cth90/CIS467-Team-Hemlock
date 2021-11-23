@@ -14,7 +14,7 @@ WHERE loc.name = %s AND t.anonymous = 0';
 function aah_render_donor_list($attr)
 {
     ob_start();
-    echo '<ul style="list-style-type:none">';
+    echo '<ul style="list-style-type:none;margin:0;padding:0">';
     if (isset($attr['location'])) {
         $donors = aah_get_donors_by_location($attr['location']);
 
