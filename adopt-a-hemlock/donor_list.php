@@ -7,7 +7,7 @@ function aah_get_donors_by_location($loc)
     $sql = 'SELECT t.name FROM `aah_transactions` as t
 left join `aah_trees` as tree on tree.id = t.tree_id
 left join `aah_locations` as loc on loc.id = tree.location_id
-WHERE loc.name = %s';
+WHERE loc.name = %s AND t.anonymous = 0';
     return $wpdb->get_results($wpdb->prepare($sql, $loc), ARRAY_N);
 }
 
@@ -26,4 +26,4 @@ function aah_render_donor_list($attr)
     return ob_get_clean();
 }
 
-add_shortcode('donor-list', 'aah_render_donor_list');
+add_shortcode('donor_list', 'aah_render_donor_list');
