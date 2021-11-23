@@ -15,7 +15,7 @@ function aah_render_donor_list($attr)
 {
     ob_start();
     echo '<ul style="list-style-type:none">';
-    if (isset($loc)) {
+    if (isset($attr['location'])) {
         $donors = aah_get_donors_by_location($attr['location']);
 
         foreach($donors as $donor) {
