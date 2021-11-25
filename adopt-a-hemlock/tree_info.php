@@ -167,7 +167,6 @@ add_shortcode('tree_count', 'aah_get_tree_count_by_location');
 // Insert transaction info into db
 function aah_insert_transaction($transaction_info)
 {
-    // todo add checks to $transaction_info
     global $wpdb;
     $result = $wpdb->insert('aah_transactions', $transaction_info);
     if (!$result) {
@@ -178,14 +177,8 @@ function aah_insert_transaction($transaction_info)
 
 // Create a new transaction
 function aah_create_new_transaction($info) {
-    $transaction_info = array(
-        'email' => $info['email'],
-        'payment_id' => $info['payment_id'],
-        'adoption_id' => $info['adoption_id'],
-        'amt_donated' => $info['dnt_amt'],
-        'anonymous' => 0,
-        'completed' => 0
-    );
+    $info['anonymous']=0;
+    $info['completed'] = 0;
 
-    return aah_insert_transaction($transaction_info);
+    return aah_insert_transaction($info);
 }

@@ -79,7 +79,7 @@ function aah_paypal_ipn_handshake() {
 function aah_handle_valid_donation() {
     $info['email'] = $_POST['payer_email'];
     $info['name'] = $_POST['first_name'] . " " . $_POST['last_name'];
-    $info['dnt_amt'] = $_POST['mc_gross'];
+    $info['amt_donated'] = $_POST['mc_gross'];
     $info['payment_id'] = $_POST['txn_id'];
     $info['adoption_id'] = md5( $_POST['txn_id'] . $_POST['payer_email']);
 

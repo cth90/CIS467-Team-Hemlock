@@ -12,7 +12,7 @@ function aah_render_adoption_page()
 
         // Handle location selection form if it was submitted
         if (!empty($_POST['tree-locations'])) {
-            if(!(aah_adopt_tree($transaction['transaction_id'], $_POST['tree-locations'], boolval($_POST['anonymous'])))) {
+            if(!(aah_adopt_tree($transaction['transaction_id'], $_POST['tree-locations'], boolval($_POST['anonymous']), $_POST['donor-name']))) {
                 echo "Tree adoption failed.";
             }
             // update transaction info
@@ -21,6 +21,12 @@ function aah_render_adoption_page()
 
         // Show details of a completed transaction
         if ($transaction['completed']) {
+
+            // Check if PDF was already generated, in case it failed before.
+            if (empty($transaction['pdf_link'])) {
+                aah_generate_adoption_pdf($transaction['transaction_id']);
+            }
+
             ?>
             <div class="adoption-info">
                 <label>Tree Tag: <input name="tree_tag" value="<?php echo $transaction['tree_tag'] ?>" type="text"
@@ -41,17 +47,18 @@ function aah_render_adoption_page()
             $locations = aah_get_locations();
             ?>
             <div class="tree-selection">
-                <p>You have not yet adopted a tree. Please select a location from the dropdown below (select any if you
-                    want a location to be selected for you).</p>
+                <p>Please select a location from the dropdown below to complete your adoption (select any if you
+                    want a location to be selected for you). You may also supply a name you wish to have printed on the certificate here.</p>
                 <form method="post" class="tree-selection-form" name="tree-selection-form">
-                    <select name="tree-locations" id="tree-locations">
+                    <label>Name: <input type="text" name="donor-name" id="donor-name" value="<?php echo $transaction['name'] ?>"></label>
+                    <br><label>Location: <select name="tree-locations" id="tree-locations">
                         <option label="Any" value="any" selected>
                             <?php
                             foreach ($locations as $location) {
                                 echo "<option label='" . $location['name'] . "' value='" . $location['id'] . "'>";
                             }
                             ?>
-                    </select>
+                    </select></label>
                     <br><label>Hide Name from Donor List: <input type="checkbox" name="anonymous" value="1"></label>
                     <input type="hidden" name="a_id" value="<?php echo $_POST['a_id'] ?>">
                     <br><button type="submit" class="tree-selection-submit">Adopt</button>
@@ -102,7 +109,7 @@ WHERE
 }
 
 // Adopt the tree
-function aah_adopt_tree($transaction_id, $location, $anon) {
+function aah_adopt_tree($transaction_id, $location, $anon, $name) {
     global $wpdb;
 
     if ($location == "any") {
@@ -114,7 +121,8 @@ function aah_adopt_tree($transaction_id, $location, $anon) {
     $updated_t = array(
         'anonymous'=>$anon,
         'completed'=>1,
-        'tree_id'=>$tree['id']
+        'tree_id'=>$tree['id'],
+        'name'=>$name
     );
 
     // update transaction
@@ -124,15 +132,21 @@ function aah_adopt_tree($transaction_id, $location, $anon) {
     }
 
     // generate pdf
+    aah_generate_adoption_pdf($transaction_id);
+
+    return true;
+}
+
+function aah_generate_adoption_pdf($transaction_id) {
+    global $wpdb;
+
+    // generate pdf
     if (!($pdf_link = aah_get_pdf_by_transaction($transaction_id))) {
         trigger_error("Unable to generate pdf");
-        // todo handle pdf error
     } else {
         // update transaction with pdf link
         if (!($wpdb->update("aah_transactions", array("pdf_link" => $pdf_link), array("id" => $transaction_id)))) {
             trigger_error("Unable to update pdf link.");
         }
     }
-
-    return true;
 }
