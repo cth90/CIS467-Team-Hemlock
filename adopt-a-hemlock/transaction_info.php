@@ -64,11 +64,11 @@ function aah_render_transaction_lookup()
     <?php
 }
 // This adds the menu page for transaction management
-function aah_configure_settings_page()
+function aah_configure_transaction_info_page()
 {
     add_menu_page("Adopt-a-Hemlock Transaction Management", "Adopt-a-Hemlock Transaction Management",
         "manage_options", "adopt-a-hemlock", "aah_render_transaction_lookup");
 }
 
 // hook to add settings to admin menu
-add_action('admin_menu', 'aah_configure_settings_page');
+add_action('admin_menu', 'aah_configure_transaction_info_page');
