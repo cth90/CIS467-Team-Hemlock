@@ -3,7 +3,6 @@
 // todo transaction lookup
 function aah_render_transaction_lookup()
 {
-    ob_start();
     ?>
     <div class="tree-lookup">
         <form action="" method="post" class="tree-lookup-form">
@@ -63,6 +62,13 @@ function aah_render_transaction_lookup()
         });
     </script>
     <?php
-    return ob_get_clean();
 }
-add_shortcode('tree_search', 'aah_render_transaction_lookup');
+// This adds the menu page for transaction management
+function aah_configure_settings_page()
+{
+    add_menu_page("Adopt-a-Hemlock Transaction Management", "Adopt-a-Hemlock Transaction Management",
+        "manage_options", "adopt-a-hemlock", "aah_render_transaction_lookup");
+}
+
+// hook to add settings to admin menu
+add_action('admin_menu', 'aah_configure_settings_page');

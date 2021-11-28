@@ -24,7 +24,6 @@ add_action('admin_post_nopriv_aah_donation_ipn', 'aah_paypal_ipn');
 // This returns the PayPal IPN URL.
 // Currently configured to use the Sandbox URL.
 function aah_get_paypal_url() {
-    // todo make this an admin panel option
     return 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr';
 }
 
@@ -104,7 +103,7 @@ add_action( 'phpmailer_init', function(&$phpmailer)use($file, $uid, $name){
 });
 
 function aah_send_donation_email($info) {
-    $headers = array('Content-Type: text/html; charset=UTF-8');
+    $headers = array('Content-Type: text/html; charset=UTF-8', 'From: "Adopt-a-Hemlock" <info@adoptahemlock.org>');
     wp_mail($info['email'], 'Thank You for Donating', aah_get_email_text($info), $headers);
 }
 

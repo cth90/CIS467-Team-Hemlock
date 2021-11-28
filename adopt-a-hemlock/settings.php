@@ -42,7 +42,7 @@ add_action('wp_ajax_aah_ajax_create_tables', 'aah_create_tables_action_ajax');
 // This adds the menu page for our plugin
 function aah_configure_settings_page()
 {
-    add_menu_page("Adopt-a-Hemlock Settings", "Adopt-a-Hemlock Settings",
+    add_menu_page("Adopt-a-Hemlock Database Init", "Adopt-a-Hemlock Database Init",
         "manage_options", "adopt-a-hemlock", "aah_render_tables_create_page");
 }
 
@@ -54,7 +54,8 @@ function aah_render_tables_create_page()
 {
     ?>
     <div class="aah-create-tables">
-        <h2>Create Database Tables and Populate Tree Database</h2>
+        <h1>DO NOT DO THIS UNLESS YOU ARE ABSOLUTELY SURE YOU KNOW WHAT YOU ARE DOING</h1>
+        <h2>Create Database Tables and Populate Tree Database (WILL DELETE ALL TRANSACTIONS)</h2>
         <button class="aah-create-tables-button">Do it!</button>
         <script type="text/javascript">
             jQuery(document).ready(function ($) {
