@@ -104,14 +104,15 @@ add_action( 'phpmailer_init', function(&$phpmailer)use($file, $uid, $name){
 });
 
 function aah_send_donation_email($info) {
-    wp_mail($info['email'], 'Thank You for Donating', aah_get_email_text($info));
+    $headers = array('Content-Type: text/html; charset=UTF-8');
+    wp_mail($info['email'], 'Thank You for Donating', aah_get_email_text($info), $headers);
 }
 
 function aah_get_email_text($info) {
 
     $email_info = array(
         '%name%'=>$info['name'],
-        '%amt_donated'=>$info['amt_donated'],
+        '%amt_donated%'=>$info['amt_donated'],
         '%link%'=>get_site_url(null, 'adoption-information?a_id=' . $info['adoption_id'])
     );
     $text = file_get_contents(plugin_dir_path(__FILE__) . 'thank_you_email.txt');
