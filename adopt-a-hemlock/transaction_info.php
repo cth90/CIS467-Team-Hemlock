@@ -67,7 +67,7 @@ function aah_render_transaction_lookup()
 function aah_configure_transaction_info_page()
 {
     add_menu_page("Adopt-a-Hemlock Transaction Management", "Adopt-a-Hemlock Transaction Management",
-        "manage_options", "adopt-a-hemlock", "aah_render_transaction_lookup");
+        "manage_options", "adopt-a-hemlock-transaction-info", "aah_render_transaction_lookup");
 }
 
 // hook to add settings to admin menu

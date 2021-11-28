@@ -43,7 +43,7 @@ add_action('wp_ajax_aah_ajax_create_tables', 'aah_create_tables_action_ajax');
 function aah_configure_settings_page()
 {
     add_menu_page("Adopt-a-Hemlock Database Init", "Adopt-a-Hemlock Database Init",
-        "manage_options", "adopt-a-hemlock", "aah_render_tables_create_page");
+        "manage_options", "adopt-a-hemlock-dinit", "aah_render_tables_create_page");
 }
 
 // hook to add settings to admin menu
