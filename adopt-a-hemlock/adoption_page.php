@@ -25,10 +25,12 @@ function aah_render_adoption_page()
             // Check if PDF was already generated, in case it failed before.
             if (empty($transaction['pdf_link'])) {
                 aah_generate_adoption_pdf($transaction['transaction_id']);
+                $transaction = aah_get_transaction_info_by_aid($_GET['a_id']);
             }
 
             ?>
             <div class="adoption-info">
+                <h2><?php echo "<a href='" . $transaction['link'] . "'>" . "Please click here to access your certificate" . "</a>"; ?></h2><br>
                 <label>Tree Tag: <input name="tree_tag" value="<?php echo $transaction['tree_tag'] ?>" type="text"
                                         disabled></label>
                 <br><label>Location: <input name="tree_location" value="<?php echo $transaction['location_name'] ?>"
@@ -38,8 +40,7 @@ function aah_render_adoption_page()
                                                type="text" disabled></label>
                 <br><label>Notes: <input name="tree_notes" value="<?php echo $transaction['notes'] ?>" type="text"
                                          disabled></label>
-                <br><label>PDF
-                    Certificate: <?php echo "<a href='" . $transaction['link'] . "'>" . $transaction['link'] . "</a>"; ?></label>
+                <br>
             </div>
             <?php
         } else {

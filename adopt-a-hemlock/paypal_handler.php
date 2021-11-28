@@ -93,17 +93,29 @@ function aah_handle_valid_donation() {
     }
 }
 
+// Attach image to picture
+$file = plugin_dir_path(__FILE__) . 'thankyou.png';
+$uid = 'thank-you-picture';
+$name = 'thankyou.png';
+global $phpmailer;
+add_action( 'phpmailer_init', function(&$phpmailer)use($file, $uid, $name){
+    $phpmailer->SMTPKeepAlive = true;
+    $phpmailer->AddEmbeddedImage($file, $uid, $name);
+});
+
 function aah_send_donation_email($info) {
-    // todo send initial donation thank you email
     wp_mail($info['email'], 'Thank You for Donating', aah_get_email_text($info));
 }
 
 function aah_get_email_text($info) {
-    // todo generate email text
 
-    $info['link'] = get_site_url(null, 'adoption-information?a_id=' . $info['adoption_id']);
-    $email_body = 'Link: ' . $info['link'];
-    return $email_body;
+    $email_info = array(
+        '%name%'=>$info['name'],
+        '%amt_donated'=>$info['amt_donated'],
+        '%link%'=>get_site_url(null, 'adoption-information?a_id=' . $info['adoption_id'])
+    );
+    $text = file_get_contents(plugin_dir_path(__FILE__) . 'thank_you_email.txt');
+    return strtr($text, $email_info);
 }
 
 function aah_handle_invalid_donation() {
