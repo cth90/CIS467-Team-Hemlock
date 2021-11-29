@@ -98,11 +98,13 @@ function aah_render_transaction_lookup()
                         <?php
                     }
                 } ?>
-                <br><br><br>
+                <br><br>
             </td>
         </tr>
         <tr>
             <td>
+                <h2>Add New Tree</h2>
+                <p>You can add a new tree to the database using this form.</p>
                 <?php
 
                 $locations = aah_get_locations();
@@ -123,17 +125,14 @@ function aah_render_transaction_lookup()
                     $result = $wpdb->insert('aah_trees', $tree_info);
                     if (!$result) {
                         trigger_error("Tree creation failed.");
-                        echo "<h3>Tree Creation Failed!</h3><br>";
+                        echo "<h3>Tree Creation Failed!</h3>";
                     } else {
-                        echo "<h3>Tree Created Successfully!</h3><br>";
+                        echo "<h3>Tree Created Successfully!</h3>";
                     }
 
                 }
 
                 ?>
-                <h2>Add New Tree</h2>
-                <p>You can add a new tree to the database using this form.</p>
-                <br>
                 <div class="tree-add">
                     <form action="" method="post" class="tree-add-form">
                         <label>Tag: <input type="text" id="tree_tag" name="tree_tag"></label><br>
@@ -151,6 +150,32 @@ function aah_render_transaction_lookup()
                         <label>Notes: <input type="text" id="tree_notes" name="tree_notes"></label><br>
                         <input type="hidden" id="add-new" name="add-new" value="1">
                         <button type="submit" class="tree-add-button">Add Tree</button>
+                    </form>
+                </div>
+                <br><br>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>Delete Tree</h2>
+                <p>You can delete a tree from the database using this form.</p>
+                <?php
+                    // delete the tree
+                    if ($_POST['delete-tree'] AND !empty($_POST['tree_tag'])) {
+                        global $wpdb;
+
+                        if(!($result = $wpdb->delete('aah_trees', array('tag'=>$_POST['tree_tag'])))) {
+                            echo "<h3>Tree Deletion Failed!</h3>";
+                        } else {
+                            echo "<h3>Tree Deleted Successfully!</h3>";
+                        }
+                    }
+                ?>
+                <div class="tree-delete">
+                    <form action="" method="post" class="tree-delete-form">
+                        <label>Tag: <input type="text" id="tree_tag" name="tree_tag"></label><br>
+                        <input type="hidden" id="delete-tree" name="delete-tree" value="1">
+                        <button type="submit" class="tree-delete-button">Delete Tree</button>
                     </form>
                 </div>
             </td>
