@@ -49,6 +49,13 @@ function aah_render_transaction_lookup()
             if(!(aah_edit_transaction($transaction_id, $edited_transaction))) {
                 echo "<br><h2>Transaction Edit Failed!</h2>";
             }
+
+            if ($_POST['search-type'] == 'aid')
+                $transaction = aah_get_transaction_info_by_aid($_POST['search-key']);
+            else {
+                $transaction = aah_get_transaction_info_by_tag($_POST['search-key']);
+            }
+
         }
 
         if ($transaction) {
@@ -56,7 +63,7 @@ function aah_render_transaction_lookup()
                 <br><br>
             <div class="transaction-info-form">
                 <form action="" method="post" class="transaction-edit-form">
-                    <label>Adoption ID: <a href="<?php echo site_url('adoption-information') . "?aid=" . $transaction['a_id']; ?>"><?php echo $transaction['a_id']; ?></a></label>
+                    <label>Adoption ID: <a href="<?php echo site_url('adoption-information') . "?a_id=" . $transaction['a_id']; ?>"><?php echo $transaction['a_id']; ?></a></label>
                     <br><label>Tree Tag: <input name="tree_tag" id="tree_tag"
                                             value="<?php echo $transaction['tree_tag']; ?>"></label>
                     <br><label>Name: <input name="name" id="name" value="<?php echo $transaction['name']; ?>"></label>
