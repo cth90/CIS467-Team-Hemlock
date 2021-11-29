@@ -21,7 +21,7 @@ function aah_get_any_unadopted_tree()
 function aah_get_unadopted_tree_by_tag($tag)
 {
     global $wpdb;
-    $sql = 'SELECT a.* FROM `aah_trees` a WHERE a.tag = %s AND a.id NOT IN (SELECT b.tree_id FROM `aah_transactions` b) LIMIT 1';
+    $sql = 'SELECT a.* FROM `aah_trees` a WHERE a.tag = %s AND a.id NOT IN (SELECT b.tree_id FROM `aah_transactions` b WHERE b.tree_id = a.id) LIMIT 1';
     if (!($result = $wpdb->get_row($wpdb->prepare($sql, $tag), ARRAY_A))) {
         trigger_error("No tree found.");
         return false;
