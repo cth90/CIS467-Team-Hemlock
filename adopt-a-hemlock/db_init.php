@@ -123,7 +123,7 @@ function aah_parse_line($line, $headers) {
 
 // Insert a tree into the database
 function aah_insert_tree($tree_info) {
-    $tree_info['tag'] = intval(ltrim($tree_info['tag'], 'Ss0'));
+    $tree_info['tag'] = ltrim($tree_info['tag'], 'Ss');
     global $wpdb;
     return $wpdb->query($wpdb->prepare(SQL_INSERT_TEMPLATE, $tree_info));
 }
