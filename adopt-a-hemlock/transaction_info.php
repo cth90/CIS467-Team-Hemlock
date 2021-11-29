@@ -170,7 +170,7 @@ function aah_edit_transaction($transaction_id, array $edited_transaction)
 // This adds the menu page for transaction management
 function aah_configure_transaction_info_page()
 {
-    add_menu_page("Adopt-a-Hemlock Transaction Management", "Adopt-a-Hemlock Transaction Management",
+    add_menu_page("Adopt-a-Hemlock Management", "Adopt-a-Hemlock Management",
         "manage_options", "adopt-a-hemlock-transaction-info", "aah_render_transaction_lookup");
 }
 
