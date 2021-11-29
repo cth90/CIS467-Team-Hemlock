@@ -10,12 +10,12 @@ function aah_render_transaction_lookup()
     <div class="transaction-lookup">
         <form action="" method="post" class="transaction-lookup-form">
             <div class="form-field">
-                <input name="search-key" type="text">
+                <input name="search-key" type="text"><br>
                 <label>Tree Tag <input type="radio" id="tag-search-type" name="search-type" value="tree-tag"></label>
                 <label>Adoption ID <input type="radio" id="id-search-type" name="search-type" value="aid"></label>
+                <button type="submit" class="transaction-lookup-button">Search</button>
             </div>
         </form>
-        <button type="button" class="transaction-lookup-button">Search</button>
     </div><br><br>
 
     <?php
