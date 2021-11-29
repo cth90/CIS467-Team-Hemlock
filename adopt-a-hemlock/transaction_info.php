@@ -158,7 +158,7 @@ function aah_render_transaction_lookup()
         <tr>
             <td>
                 <h2>Delete Tree</h2>
-                <p>You can delete a tree from the database using this form.</p>
+                <p>You can delete a tree from the database using this form.<br>Make sure to reassign any transactions attached to this tree first!</p>
                 <?php
                     // delete the tree
                     if ($_POST['delete-tree'] AND !empty($_POST['tree_tag'])) {
