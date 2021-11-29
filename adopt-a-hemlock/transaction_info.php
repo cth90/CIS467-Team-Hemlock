@@ -1,7 +1,6 @@
 <?php
 require_once 'adoption_page.php';
 
-// todo transaction lookup
 function aah_render_transaction_lookup()
 {
     ?>
