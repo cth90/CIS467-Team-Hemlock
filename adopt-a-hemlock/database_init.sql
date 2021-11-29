@@ -5,7 +5,7 @@ drop table if exists `aah_locations`;
 CREATE TABLE `aah_trees`
 (
     `id`          int AUTO_INCREMENT,
-    `tag`         varchar(8) NOT NULL,
+    `tag`         int NOT NULL,
     `dbh`         int,
     `latitude`    varchar(255),
     `longitude`   varchar(255),

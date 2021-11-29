@@ -17,7 +17,7 @@ const REQUIRED_FIELDS_LIST = array(
 );
 
 const SQL_INSERT_TEMPLATE = 'INSERT INTO aah_trees (tag, dbh, latitude, longitude, notes, location_id)
-SELECT %s, %d, %s, %s, %s, id
+SELECT %d, %d, %s, %s, %s, id
   FROM aah_locations
  WHERE parcel = %s or address = %s
  LIMIT 1';
@@ -123,6 +123,7 @@ function aah_parse_line($line, $headers) {
 
 // Insert a tree into the database
 function aah_insert_tree($tree_info) {
+    $tree_info['tag'] = intval(ltrim($tree_info['tag'], 'Ss0'));
     global $wpdb;
     return $wpdb->query($wpdb->prepare(SQL_INSERT_TEMPLATE, $tree_info));
 }
