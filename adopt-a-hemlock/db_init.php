@@ -124,7 +124,7 @@ function aah_parse_line($line, $headers) {
 // Insert a tree into the database
 function aah_insert_tree($tree_info) {
 
-    if ((strpos($tree_info['tag'], 'S') !== false) OR (strpos($tree_info['tag'], 's') !== false)) {
+    if (strtoupper(substr($tree_info['tag'], 0, 1)) === "S") {
         $tree_info['notes'] = "S not shown on physical tag. Tag is plastic. " . $tree_info['notes'];
     }
     global $wpdb;
