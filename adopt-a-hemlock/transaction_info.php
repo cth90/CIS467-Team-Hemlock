@@ -32,7 +32,7 @@ function aah_render_transaction_lookup()
             $edited_transaction = array();
             $transaction_id = $_POST['transaction_id'];
             if (!empty($_POST['tree_tag']) AND $_POST['tree_tag'] != $transaction['tree_tag']) {
-                if (!($edited_transaction['tree_id'] = aah_get_unadopted_tree_by_tag($_POST['tree_tag'])['tree_id'])) {
+                if (!($edited_transaction['tree_id'] = aah_get_unadopted_tree_by_tag($_POST['tree_tag'])['id'])) {
                     echo "<h2>Reassigned Tree Tag Not Found!</h2>";
                 }
             }
