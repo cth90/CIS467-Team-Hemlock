@@ -11,7 +11,7 @@ function aah_render_transaction_lookup()
         <form action="" method="post" class="transaction-lookup-form">
             <div class="form-field">
                 <input name="search-key" type="text"><br>
-                <label>Tree Tag <input type="radio" id="tag-search-type" name="search-type" value="tree-tag"></label>
+                <label>Tree Tag <input type="radio" id="tag-search-type" name="search-type" value="tree-tag" checked></label>
                 <label>Adoption ID <input type="radio" id="id-search-type" name="search-type" value="aid"></label><br>
                 <button type="submit" class="transaction-lookup-button">Search</button>
             </div>
@@ -47,6 +47,8 @@ function aah_render_transaction_lookup()
 
             if(!(aah_edit_transaction($transaction_id, $edited_transaction))) {
                 echo "<br><h2>Transaction Edit Failed!</h2>";
+            } else {
+                echo "<br><h2>Transaction Successfully Edited!</h2>";
             }
 
             if ($_POST['search-type'] == 'aid')

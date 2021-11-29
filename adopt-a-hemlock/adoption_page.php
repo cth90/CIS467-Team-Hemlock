@@ -56,7 +56,7 @@ function aah_render_adoption_page()
                         <option label="Any" value="any" selected>
                             <?php
                             foreach ($locations as $location) {
-                                echo "<option label='" . $location['name'] . "' value='" . $location['id'] . "'>";
+                                echo '<option label="' . $location['name'] . '" value="'. $location['id'] . '">';
                             }
                             ?>
                     </select></label>
