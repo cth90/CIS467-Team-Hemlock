@@ -12,7 +12,7 @@ function aah_render_transaction_lookup()
             <div class="form-field">
                 <input name="search-key" type="text"><br>
                 <label>Tree Tag <input type="radio" id="tag-search-type" name="search-type" value="tree-tag"></label>
-                <label>Adoption ID <input type="radio" id="id-search-type" name="search-type" value="aid"></label>
+                <label>Adoption ID <input type="radio" id="id-search-type" name="search-type" value="aid"></label><br>
                 <button type="submit" class="transaction-lookup-button">Search</button>
             </div>
         </form>
@@ -57,11 +57,11 @@ function aah_render_transaction_lookup()
             <div class="transaction-info-form">
                 <form action="" method="post" class="transaction-edit-form">
                     <label>Adoption ID: <a href="<?php echo site_url('adoption-information') . "?aid=" . $transaction['a_id']; ?>"><?php echo $transaction['a_id']; ?></a></label>
-                    <label>Tree Tag: <input name="tree_tag" id="tree_tag"
+                    <br><label>Tree Tag: <input name="tree_tag" id="tree_tag"
                                             value="<?php echo $transaction['tree_tag']; ?>"></label>
-                    <label>Name: <input name="name" id="name" value="<?php echo $transaction['name']; ?>"></label>
-                    <label>Email: <input name="email" id="email" value="<?php echo $transaction['email']; ?>"></label>
-                    <label>Anonymous: <input type="checkbox" name="anonymous" id="anonymous" value="1" <?php
+                    <br><label>Name: <input name="name" id="name" value="<?php echo $transaction['name']; ?>"></label>
+                    <br><label>Email: <input name="email" id="email" value="<?php echo $transaction['email']; ?>"></label>
+                    <br><label>Anonymous: <input type="checkbox" name="anonymous" id="anonymous" value="1" <?php
                         if ($transaction['anonymous']) {
                             echo "checked";
                         }
@@ -71,7 +71,7 @@ function aah_render_transaction_lookup()
                     <input type="hidden" name="search-key" id="search-key" value="<?php echo $_POST['search-key']; ?>">
                     <input type="hidden" name="search-type" id="search-type" value="<?php echo $_POST['search-type']; ?>">
                     <input type="hidden" name="edited" id="edited" value="1">
-                    <button type="submit" class="transaction-edit-button">Submit Edits</button>
+                    <br><button type="submit" class="transaction-edit-button">Submit Edits</button>
                 </form>
             </div>
 
