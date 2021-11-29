@@ -98,6 +98,7 @@ function aah_render_transaction_lookup()
                         <?php
                     }
                 } ?>
+                <br><br><br>
             </td>
         </tr>
         <tr>
