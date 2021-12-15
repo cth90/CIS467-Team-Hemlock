@@ -24,7 +24,7 @@ add_action('admin_post_nopriv_aah_donation_ipn', 'aah_paypal_ipn');
 // This returns the PayPal IPN URL.
 // Currently configured to use the Sandbox URL.
 function aah_get_paypal_url() {
-    return 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr';
+	return 'https://ipnpb.paypal.com/cgi-bin/webscr';
 }
 
 // Verify PayPal transaction
